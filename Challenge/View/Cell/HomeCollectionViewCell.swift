@@ -28,7 +28,13 @@ class HomeCollectionViewCell: UICollectionViewCell {
             titleLabel.text = nil
             subtitleLabel.text = nil
             
-            if let photoString = model.movie?.image?.posters?.first?.url, let photoURL = URL(string: photoString) {
+            let widthPosters = model.movie?.image?.posters?.map({ $0.width ?? -1 }).filter({ $0 != -1 }).sorted(by: { Int($0) < Int($1) })
+            
+            var bestWidth: NSNumber {
+                return 0
+            }
+            
+            if let photoString = model.movie?.image?.posters?.filter({ $0.width == bestWidth }).first?.url, let photoURL = URL(string: photoString) {
                 imageView.af_setImage(withURL: photoURL, placeholderImage: #imageLiteral(resourceName: "Placeholder"))
             }
             

@@ -82,6 +82,7 @@
 		822EEC7F1F3BFA1000641E0B /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		822EEC811F3BFA3100641E0B /* ID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ID.swift; sourceTree = "<group>"; };
 		822EEC831F3BFA4600641E0B /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		828296901F3C7A3700E97B93 /* playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = playground.playground; sourceTree = "<group>"; };
 		82E953131F3BFD4600840328 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeCollectionViewCell.swift; path = View/Cell/HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		82E953171F3C012F00840328 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9E6B9A053F7EE12467A0D6B0 /* Pods_ChallengeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChallengeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +196,7 @@
 				82E953171F3C012F00840328 /* Extensions.swift */,
 				822EEC3F1F3BF5E300641E0B /* Info.plist */,
 				822EEC3A1F3BF5E300641E0B /* Assets.xcassets */,
+				828296901F3C7A3700E97B93 /* playground.playground */,
 				822EEC641F3BF71D00641E0B /* Layouts */,
 				822EEC771F3BF78800641E0B /* Util */,
 				822EEC671F3BF74C00641E0B /* Fonts */,
