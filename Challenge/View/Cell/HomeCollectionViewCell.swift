@@ -25,13 +25,26 @@ class HomeCollectionViewCell: UICollectionViewCell {
             
             guard let model = model else { return }
             
-            titleLabel.text = nil
-            subtitleLabel.text = nil
+            titleLabel.text = model.movie?.title?.uppercased()
+            titleLabel.font = Constants.Font.biggerBold
+            titleLabel.textColor = Constants.Color.yellow
+            titleLabel.shadowColor = Constants.Color.dark
+            titleLabel.shadowOffset = CGSize(width: 0, height: 5)
             
-            let widthPosters = model.movie?.image?.posters?.map({ $0.width ?? -1 }).filter({ $0 != -1 }).sorted(by: { Int($0) < Int($1) })
+            subtitleLabel.text = "\(model.movie?.year ?? 0000)"
+            subtitleLabel.textColor = Constants.Color.yellow
+            subtitleLabel.font = Constants.Font.regularBold
+            subtitleLabel.shadowColor = Constants.Color.dark
+            subtitleLabel.shadowOffset = CGSize(width: 0, height: 3)
+            
+            let imagesWidth = model.movie?.image?.posters?.map({ $0.width ?? -1 }).filter({ $0 != -1 }).sorted(by: { Int($0) < Int($1) })
             
             var bestWidth: NSNumber {
-                return 0
+                if let width = imagesWidth?.filter({ Double($0) > 700 && Double($0) < 1300 }).first {
+                    return width
+                }else {
+                    return imagesWidth?.first ?? 0
+                }
             }
             
             if let photoString = model.movie?.image?.posters?.filter({ $0.width == bestWidth }).first?.url, let photoURL = URL(string: photoString) {

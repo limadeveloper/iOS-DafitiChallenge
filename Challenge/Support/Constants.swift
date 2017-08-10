@@ -97,5 +97,21 @@ struct Constants {
     
     struct Color {
         static let dark = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        static let yellow = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        static let lightYellow = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+    }
+    
+    struct Font {
+        
+        private struct Name {
+            static let bold = "Poppins-Bold"
+            static let light = "Poppins-Light"
+            static let medium = "Poppins-Medium"
+            static let regular = "Poppins-Regular"
+            static let semibold = "Poppins-SemiBold"
+        }
+        
+        static let biggerBold = UIFont(name: Name.bold, size: 32)
+        static let regularBold = UIFont(name: Name.bold, size: 22)
     }
 }
