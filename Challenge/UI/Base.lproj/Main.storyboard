@@ -60,37 +60,17 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHb-J0-hbt">
-                                                    <rect key="frame" x="146" y="10" width="44" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="44" id="JwN-9h-9bD"/>
-                                                        <constraint firstAttribute="width" constant="44" id="XSK-c5-lsE"/>
-                                                    </constraints>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0PZ-sW-YMS">
-                                                    <rect key="frame" x="15" y="22" width="35" height="35"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="35" id="DZL-uw-MN1"/>
-                                                        <constraint firstAttribute="height" constant="35" id="K2m-jT-kxs"/>
-                                                    </constraints>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </button>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="jmF-BQ-Iu3" secondAttribute="trailing" id="6a4-ac-NUY"/>
                                             <constraint firstAttribute="centerY" secondItem="MtP-L4-ASj" secondAttribute="centerY" id="FVh-ow-Jnu"/>
-                                            <constraint firstItem="0PZ-sW-YMS" firstAttribute="top" secondItem="eGG-mV-NPK" secondAttribute="top" constant="22" id="IYh-6e-gsB"/>
                                             <constraint firstAttribute="trailing" secondItem="T3r-gj-oWi" secondAttribute="trailing" id="KSr-0O-Sd9"/>
                                             <constraint firstItem="3CD-UT-kHZ" firstAttribute="top" secondItem="eGG-mV-NPK" secondAttribute="top" id="SSN-Sa-uNv"/>
                                             <constraint firstAttribute="trailing" secondItem="MtP-L4-ASj" secondAttribute="trailing" id="Sk6-XU-66U"/>
                                             <constraint firstItem="T3r-gj-oWi" firstAttribute="top" secondItem="jmF-BQ-Iu3" secondAttribute="bottom" id="Y2e-su-NIT"/>
                                             <constraint firstItem="3CD-UT-kHZ" firstAttribute="leading" secondItem="eGG-mV-NPK" secondAttribute="leading" id="aRp-wH-FJS"/>
-                                            <constraint firstItem="0PZ-sW-YMS" firstAttribute="leading" secondItem="eGG-mV-NPK" secondAttribute="leading" constant="15" id="c0s-Hw-oTX"/>
                                             <constraint firstAttribute="trailing" secondItem="3CD-UT-kHZ" secondAttribute="trailing" id="ftl-wY-wcE"/>
-                                            <constraint firstItem="ZHb-J0-hbt" firstAttribute="top" secondItem="eGG-mV-NPK" secondAttribute="top" constant="10" id="gLs-Fl-Ds7"/>
-                                            <constraint firstAttribute="trailing" secondItem="ZHb-J0-hbt" secondAttribute="trailing" constant="10" id="hPm-XS-UxU"/>
                                             <constraint firstItem="MtP-L4-ASj" firstAttribute="leading" secondItem="eGG-mV-NPK" secondAttribute="leading" id="jlb-ym-8Ww"/>
                                             <constraint firstItem="jmF-BQ-Iu3" firstAttribute="leading" secondItem="eGG-mV-NPK" secondAttribute="leading" id="meP-OW-Jql"/>
                                             <constraint firstAttribute="bottom" secondItem="3CD-UT-kHZ" secondAttribute="bottom" id="mpf-wq-BVb"/>
@@ -123,11 +103,48 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Arp-Lv-uNv" id="rvf-Is-Vxb"/>
+                        <segue destination="ZM8-ro-0oG" kind="presentation" identifier="Details" id="xn3-rI-UJe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5k-jk-Yf5" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140" y="137.18140929535232"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="3Wc-j4-4te">
+            <objects>
+                <viewController id="ZM8-ro-0oG" customClass="DetailsViewController" customModule="Challenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="z73-Td-mBA"/>
+                        <viewControllerLayoutGuide type="bottom" id="pq8-4B-YLr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A8M-2n-Ch8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcE-8y-rdZ">
+                                <rect key="frame" x="313" y="28" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="Gp9-jv-Sfo"/>
+                                    <constraint firstAttribute="height" constant="30" id="mX1-4x-KQF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="dismiss" destination="ZM8-ro-0oG" eventType="touchUpInside" id="CnV-xB-rxp"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="fcE-8y-rdZ" secondAttribute="trailing" id="U5b-jG-Fei"/>
+                            <constraint firstItem="fcE-8y-rdZ" firstAttribute="top" secondItem="z73-Td-mBA" secondAttribute="bottom" constant="8" id="o28-nI-YIt"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j9v-BL-gaF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="868" y="137"/>
         </scene>
     </scenes>
 </document>

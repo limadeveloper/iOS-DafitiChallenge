@@ -52,12 +52,6 @@ class HomeController: UIViewController {
                         self.models = result
                     }
                     
-                    // Sort by released date
-                    self.models = self.models?.sorted(by: { (first, last) -> Bool in
-                        guard let firstYear = first.movie?.released, let lastYear = last.movie?.released else { return false }
-                        return firstYear > lastYear
-                    })
-                    
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.index = Int()
                     self.page = page
@@ -113,6 +107,8 @@ class HomeController: UIViewController {
     
     fileprivate func updateUI() {
         
+        navigationItem.title = NSLocalizedString(Constants.Text.movies, comment: "")
+        
         view.backgroundColor = Constants.Color.dark
         
         collectionView.contentInset.top = 5
@@ -166,6 +162,20 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Movie: \(models?[indexPath.row].movie?.title ?? "---")")
+        performSegue(withIdentifier: Constants.Storyboard.Segue.details, sender: indexPath)
+    }
+}
+
+extension HomeController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        switch identifier {
+        case Constants.Storyboard.Segue.details:
+            guard let indexPath = sender as? IndexPath else { return }
+            let controller = segue.destination as? DetailsViewController
+            controller?.object = models?[indexPath.row]
+        default:
+            break
+        }
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		427237F20966D38B337547AA /* Pods_ChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BDEA7B39EBB74243064E6E /* Pods_ChallengeTests.framework */; };
+		822E10E01F3D629D000E029E /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822E10DF1F3D629D000E029E /* DetailsViewController.swift */; };
 		822EEC341F3BF5E300641E0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EEC331F3BF5E300641E0B /* AppDelegate.swift */; };
 		822EEC361F3BF5E300641E0B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EEC351F3BF5E300641E0B /* HomeController.swift */; };
 		822EEC391F3BF5E300641E0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 822EEC371F3BF5E300641E0B /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		16C45088FAF431CD430D458F /* Pods-ChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChallengeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChallengeUITests/Pods-ChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		47BDEA7B39EBB74243064E6E /* Pods_ChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		822E10DF1F3D629D000E029E /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		822EEC301F3BF5E300641E0B /* Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Challenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		822EEC331F3BF5E300641E0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		822EEC351F3BF5E300641E0B /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				822EEC351F3BF5E300641E0B /* HomeController.swift */,
+				822E10DF1F3D629D000E029E /* DetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				822EEC661F3BF71D00641E0B /* UltraVisualLayout.swift in Sources */,
 				822EEC801F3BFA1000641E0B /* Movie.swift in Sources */,
 				822EEC7B1F3BF85700641E0B /* Constants.swift in Sources */,
+				822E10E01F3D629D000E029E /* DetailsViewController.swift in Sources */,
 				822EEC841F3BFA4600641E0B /* Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
