@@ -19,8 +19,6 @@ struct AlertUtil {
             controller.addAction(action)
         }
         
-        DispatchQueue.main.async {
-            target.present(controller, animated: true, completion: nil)
-        }
+        target.present(controller, animated: true, completion: nil)
     }
 }

@@ -31,7 +31,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
             titleLabel.shadowColor = Constants.Color.dark
             titleLabel.shadowOffset = CGSize(width: 0, height: 5)
             
-            subtitleLabel.text = "\(model.movie?.year ?? 0000)"
+            subtitleLabel.text = model.movie?.released
             subtitleLabel.textColor = Constants.Color.yellow
             subtitleLabel.font = Constants.Font.regularBold
             subtitleLabel.shadowColor = Constants.Color.dark

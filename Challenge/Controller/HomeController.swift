@@ -16,12 +16,15 @@ class HomeController: UIViewController {
     fileprivate var models: [Model]? = [Model]()
     fileprivate var index = Int()
     fileprivate let cellName = "cell"
+    fileprivate var page = 1
+    fileprivate let refreshControl = UIRefreshControl()
     
     // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadData()
+        setupRefreshControl()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -37,16 +40,41 @@ class HomeController: UIViewController {
             
             func successFinish() {
                 DispatchQueue.main.async {
+                    
+                    // Remove duplicates
+                    if let models = self.models, models.count > 0 {
+                        var result = [Model]()
+                        for model in models {
+                            let hasData = result.filter({ $0.movie?.title == model.movie?.title }).count > 0
+                            guard !hasData else { continue }
+                            result.append(model)
+                        }
+                        self.models = result
+                    }
+                    
+                    // Sort by released date
+                    self.models = self.models?.sorted(by: { (first, last) -> Bool in
+                        guard let firstYear = first.movie?.released, let lastYear = last.movie?.released else { return false }
+                        return firstYear > lastYear
+                    })
+                    
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.index = Int()
+                    self.page = page
+                    self.refreshControl.endRefreshing()
                     self.updateUI()
                 }
             }
             
             func errorFinish(error: String?) {
-                self.index = Int()
-                let action = UIAlertAction(title: Constants.Text.done, style: .destructive, handler: nil)
-                AlertUtil.showAlert(message: error, actions: [action], target: self)
+                DispatchQueue.main.async {
+                    
+                    self.index = Int()
+                    self.refreshControl.endRefreshing()
+                    
+                    let action = UIAlertAction(title: Constants.Text.done, style: .destructive, handler: nil)
+                    AlertUtil.showAlert(message: error ?? Constants.API.Errors.getErrorMessage(byCode: 0), actions: [action], target: self)
+                }
             }
             
             func prepare(movies: [JSON]) {
@@ -87,9 +115,29 @@ class HomeController: UIViewController {
         
         view.backgroundColor = Constants.Color.dark
         
-        collectionView?.backgroundColor = .clear
-        collectionView?.decelerationRate = UIScrollViewDecelerationRateFast
-        collectionView?.reloadData()
+        collectionView.contentInset.top = 5
+        collectionView.backgroundColor = .clear
+        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        collectionView.reloadData()
+        
+        print("Page: \(page)")
+        print("Count: \(models?.count ?? 0)")
+    }
+    
+    fileprivate func setupRefreshControl() {
+        
+        refreshControl.tintColor = Constants.Color.yellow
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        
+        if #available(iOS 10.0, *) {
+            collectionView.refreshControl = refreshControl
+        } else {
+            collectionView.addSubview(refreshControl)
+        }
+    }
+    
+    @objc fileprivate func refresh(sender: UIRefreshControl) {
+        loadData()
     }
 }
 
@@ -107,6 +155,14 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! HomeCollectionViewCell
         cell.model = models?[indexPath.row]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let models = models, models.count > 0 else { return }
+        let lastItem = models.count-1
+        if indexPath.row == lastItem {
+            loadData(page: self.page+1)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
