@@ -48,6 +48,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
             }
             
             if let photoString = model.movie?.image?.posters?.filter({ $0.width == bestWidth }).first?.url, let photoURL = URL(string: photoString) {
+                model.movie?.image?.selectedUrl = photoURL
                 imageView.af_setImage(withURL: photoURL, placeholderImage: #imageLiteral(resourceName: "Placeholder"))
             }
             

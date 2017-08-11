@@ -115,11 +115,19 @@ struct Constants {
         
         static let biggerBold = UIFont(name: Name.bold, size: 32)
         static let regularBold = UIFont(name: Name.bold, size: 22)
+        static let smallBold = UIFont(name: Name.bold, size: 17)
     }
     
-    struct Storyboard {
-        struct Segue {
-            static let details = "Details"
+    struct UI {
+        
+        struct Storyboard {
+            struct Segue {
+                static let details = "Details"
+            }
+        }
+        
+        struct XIB {
+            static let navigationBarView = "NavigationBarView"
         }
     }
 }

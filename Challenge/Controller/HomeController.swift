@@ -162,7 +162,7 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Constants.Storyboard.Segue.details, sender: indexPath)
+        performSegue(withIdentifier: Constants.UI.Storyboard.Segue.details, sender: indexPath)
     }
 }
 
@@ -170,10 +170,10 @@ extension HomeController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
         switch identifier {
-        case Constants.Storyboard.Segue.details:
+        case Constants.UI.Storyboard.Segue.details:
             guard let indexPath = sender as? IndexPath else { return }
             let controller = segue.destination as? DetailsViewController
-            controller?.object = models?[indexPath.row]
+            controller?.model = models?[indexPath.row]
         default:
             break
         }

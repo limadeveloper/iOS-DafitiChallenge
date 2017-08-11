@@ -10,6 +10,7 @@ import Foundation
 
 class Image {
     
+    var selectedUrl: URL?
     var backdrops: [TMDBMovieBackdrop]?
     var posters: [TMDBMoviePoster]?
     

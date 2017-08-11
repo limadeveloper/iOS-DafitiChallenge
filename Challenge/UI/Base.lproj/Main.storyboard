@@ -122,29 +122,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcE-8y-rdZ">
-                                <rect key="frame" x="313" y="28" width="46" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4VP-qY-kIi">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6X-f9-78g">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="Gp9-jv-Sfo"/>
-                                    <constraint firstAttribute="height" constant="30" id="mX1-4x-KQF"/>
+                                    <constraint firstAttribute="height" constant="64" id="II3-bi-EBQ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="Done"/>
+                            </view>
+                            <webView opaque="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MRe-A0-fap">
+                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="5Jx-Zp-kTm"/>
+                                </constraints>
                                 <connections>
-                                    <action selector="dismiss" destination="ZM8-ro-0oG" eventType="touchUpInside" id="CnV-xB-rxp"/>
+                                    <outlet property="delegate" destination="ZM8-ro-0oG" id="J9e-WZ-tbW"/>
                                 </connections>
-                            </button>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="fcE-8y-rdZ" secondAttribute="trailing" id="U5b-jG-Fei"/>
-                            <constraint firstItem="fcE-8y-rdZ" firstAttribute="top" secondItem="z73-Td-mBA" secondAttribute="bottom" constant="8" id="o28-nI-YIt"/>
+                            <constraint firstAttribute="trailing" secondItem="4VP-qY-kIi" secondAttribute="trailing" id="6VO-8C-odz"/>
+                            <constraint firstItem="4VP-qY-kIi" firstAttribute="leading" secondItem="A8M-2n-Ch8" secondAttribute="leading" id="A9r-Ni-13j"/>
+                            <constraint firstAttribute="trailing" secondItem="MRe-A0-fap" secondAttribute="trailing" id="DkR-bR-aBU"/>
+                            <constraint firstItem="x6X-f9-78g" firstAttribute="leading" secondItem="A8M-2n-Ch8" secondAttribute="leading" id="IG5-Uu-o4v"/>
+                            <constraint firstAttribute="trailing" secondItem="x6X-f9-78g" secondAttribute="trailing" id="IdW-vq-VgV"/>
+                            <constraint firstAttribute="topMargin" secondItem="x6X-f9-78g" secondAttribute="top" id="Iqd-YW-Sc3"/>
+                            <constraint firstAttribute="topMargin" secondItem="4VP-qY-kIi" secondAttribute="top" id="Pdw-vp-3qk"/>
+                            <constraint firstItem="MRe-A0-fap" firstAttribute="leading" secondItem="A8M-2n-Ch8" secondAttribute="leading" id="Rca-5G-ahQ"/>
+                            <constraint firstItem="MRe-A0-fap" firstAttribute="top" secondItem="x6X-f9-78g" secondAttribute="bottom" id="p7d-XT-tBN"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="4VP-qY-kIi" secondAttribute="bottom" id="vvu-hg-t5W"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backgroundImage" destination="4VP-qY-kIi" id="8d6-Ik-CKe"/>
+                        <outlet property="heightConstraintWebView" destination="5Jx-Zp-kTm" id="zLY-nF-tyS"/>
+                        <outlet property="navigationView" destination="x6X-f9-78g" id="1Qf-gP-OLp"/>
+                        <outlet property="webView" destination="MRe-A0-fap" id="UV1-1g-hMU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j9v-BL-gaF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="868" y="137"/>
+            <point key="canvasLocation" x="868" y="136.28185907046478"/>
         </scene>
     </scenes>
 </document>
