@@ -36,35 +36,35 @@ class HomeController: UIViewController {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        Requests.getMovies(page: page) { (jsonMovies, error) in
+        Requests.getMovies(page: page) { [weak self] (jsonMovies, error) in
             
             func successFinish() {
                 DispatchQueue.main.async {
                     
                     // Remove duplicates
-                    if let models = self.models, models.count > 0 {
+                    if let models = self?.models, models.count > 0 {
                         var result = [Model]()
                         for model in models {
                             let hasData = result.filter({ $0.movie?.title == model.movie?.title }).count > 0
                             guard !hasData else { continue }
                             result.append(model)
                         }
-                        self.models = result
+                        self?.models = result
                     }
                     
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    self.index = Int()
-                    self.page = page
-                    self.refreshControl.endRefreshing()
-                    self.updateUI()
+                    self?.index = Int()
+                    self?.page = page
+                    self?.refreshControl.endRefreshing()
+                    self?.updateUI()
                 }
             }
             
             func errorFinish(error: String?) {
                 DispatchQueue.main.async {
                     
-                    self.index = Int()
-                    self.refreshControl.endRefreshing()
+                    self?.index = Int()
+                    self?.refreshControl.endRefreshing()
                     
                     let action = UIAlertAction(title: Constants.Text.done, style: .destructive, handler: nil)
                     AlertUtil.showAlert(message: error ?? Constants.API.Errors.getErrorMessage(byCode: 0), actions: [action], target: self)
@@ -73,7 +73,7 @@ class HomeController: UIViewController {
             
             func prepare(movies: [JSON]) {
                 
-                var model = Model(json: movies[self.index])
+                var model = Model(json: movies[self?.index ?? 0])
                 
                 guard let movie = model.movie else { errorFinish(error: error); return }
                 
@@ -83,10 +83,10 @@ class HomeController: UIViewController {
                         
                         model.movie?.image = Image(json: jsonImage)
                         
-                        self.models?.append(model)
-                        self.index += 1
+                        self?.models?.append(model)
+                        self?.index += 1
                         
-                        if self.index < movies.count {
+                        if self?.index ?? 0 < movies.count {
                             prepare(movies: movies)
                         }else {
                             successFinish()

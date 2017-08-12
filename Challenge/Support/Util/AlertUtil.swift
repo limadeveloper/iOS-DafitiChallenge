@@ -11,7 +11,7 @@ import Foundation
 
 struct AlertUtil {
     
-    static func showAlert(title: String? = nil, message: String? = nil, actions: [UIAlertAction], style: UIAlertControllerStyle = .alert, target: AnyObject) {
+    static func showAlert(title: String? = nil, message: String? = nil, actions: [UIAlertAction], style: UIAlertControllerStyle = .alert, target: AnyObject?) {
         
         let controller = UIAlertController(title: title, message: message, preferredStyle: style)
         
@@ -19,6 +19,6 @@ struct AlertUtil {
             controller.addAction(action)
         }
         
-        target.present(controller, animated: true, completion: nil)
+        target?.present(controller, animated: true, completion: nil)
     }
 }

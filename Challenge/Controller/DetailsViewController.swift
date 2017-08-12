@@ -20,14 +20,61 @@ class DetailsViewController: UIViewController {
     @IBOutlet fileprivate weak var viewError: UIView!
     @IBOutlet fileprivate weak var webView: UIWebView!
     @IBOutlet fileprivate weak var heightConstraintWebView: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var topConstraintNavigationView: NSLayoutConstraint!
     
     var model: Model?
+    var lastControllerRotationStatus: Bool?
+    
+    // MARK: - Structs, Enums...
+    struct Constraint {
+        static let topNavigationViewIsHidden: CGFloat = 64
+        static let topNavigationViewIsShow: CGFloat = 0
+    }
     
     // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        view.layoutIfNeeded()
+        
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.shouldRotate = true
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.shouldRotate = lastControllerRotationStatus ?? false
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let height = UIScreen.main.bounds.height
+        let width = UIScreen.main.bounds.width
+        
+        if height < width { // landscape
+            loadWebView(withHeight: height)
+        }else { // portrait
+            loadWebView()
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
+            isPortrait()
+        }else if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+            isLandscape()
+        }
     }
     
     // MARK: - Actions
@@ -58,7 +105,7 @@ class DetailsViewController: UIViewController {
         loadWebView()
     }
     
-    fileprivate func loadWebView() {
+    fileprivate func loadWebView(withHeight: CGFloat? = nil) {
         
         webView.isOpaque = false
         webView.backgroundColor = .clear
@@ -68,7 +115,7 @@ class DetailsViewController: UIViewController {
         let width = view.frame.size.width
         let height = (width/320) * 275
         
-        heightConstraintWebView.constant = height
+        heightConstraintWebView.constant = withHeight ?? height
         
         guard let stringUrl = model?.movie?.trailerUrl, let url = URL(string: stringUrl) else { return }
         
@@ -80,6 +127,20 @@ class DetailsViewController: UIViewController {
     fileprivate func hideError(isHidden: Bool = true) {
         viewError.isHidden = isHidden
         labelError.isHidden = isHidden
+    }
+    
+    fileprivate func isPortrait() {
+        UIView.animate(withDuration: 0.5) { 
+            self.topConstraintNavigationView.constant = Constraint.topNavigationViewIsShow
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    fileprivate func isLandscape() {
+        UIView.animate(withDuration: 0.5) {
+            self.topConstraintNavigationView.constant = Constraint.topNavigationViewIsHidden
+            self.view.layoutIfNeeded()
+        }
     }
     
     @objc fileprivate func tapOnLabelError() {

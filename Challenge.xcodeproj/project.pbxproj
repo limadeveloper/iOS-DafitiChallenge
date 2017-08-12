@@ -205,8 +205,8 @@
 				822EEC3F1F3BF5E300641E0B /* Info.plist */,
 				822EEC3A1F3BF5E300641E0B /* Assets.xcassets */,
 				828296901F3C7A3700E97B93 /* playground.playground */,
-				822EEC641F3BF71D00641E0B /* Layouts */,
 				822EEC771F3BF78800641E0B /* Util */,
+				822EEC641F3BF71D00641E0B /* Layouts */,
 				822EEC671F3BF74C00641E0B /* Fonts */,
 			);
 			path = Support;

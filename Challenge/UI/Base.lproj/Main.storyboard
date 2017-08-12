@@ -200,6 +200,7 @@ Retry?</string>
                         <outlet property="labelError" destination="lhy-TA-Qdi" id="jT0-8t-le5"/>
                         <outlet property="navigationView" destination="x6X-f9-78g" id="1Qf-gP-OLp"/>
                         <outlet property="tapGesture" destination="pAy-dG-ciK" id="nfh-Wv-xwW"/>
+                        <outlet property="topConstraintNavigationView" destination="Iqd-YW-Sc3" id="d50-wp-hrf"/>
                         <outlet property="viewError" destination="fGz-ei-2vq" id="ep9-UT-3M9"/>
                         <outlet property="webView" destination="MRe-A0-fap" id="UV1-1g-hMU"/>
                     </connections>
