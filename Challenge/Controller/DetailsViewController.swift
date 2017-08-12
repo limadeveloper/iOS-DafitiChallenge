@@ -20,12 +20,13 @@ class DetailsViewController: UIViewController {
     @IBOutlet fileprivate weak var viewError: UIView!
     @IBOutlet fileprivate weak var webView: UIWebView!
     @IBOutlet fileprivate weak var scrollView: UIScrollView!
-    @IBOutlet fileprivate weak var detailsTextView: UITextView!
+    @IBOutlet fileprivate weak var detailsTextLabel: UILabel!
     @IBOutlet fileprivate weak var heightConstraintWebView: NSLayoutConstraint!
     @IBOutlet fileprivate weak var topConstraintNavigationView: NSLayoutConstraint!
     @IBOutlet fileprivate weak var bottomConstraintScrollView: NSLayoutConstraint!
-    @IBOutlet fileprivate weak var heightConstraintDetailsTextView: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var heightConstraintDetailsTextLabel: NSLayoutConstraint!
     @IBOutlet fileprivate weak var heightConstraintContentGalleryView: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var heightConstraintGalleryLabel: NSLayoutConstraint!
     
     var model: Model?
     var lastControllerRotationStatus: Bool?
@@ -151,21 +152,53 @@ class DetailsViewController: UIViewController {
     fileprivate func isLandscape() {
         UIView.animate(withDuration: 0.5) {
             self.topConstraintNavigationView.constant = Constraint.topNavigationViewIsHidden
-            self.bottomConstraintScrollView.constant = self.scrollView.frame.size.height * (-1)
+            self.bottomConstraintScrollView.constant = self.scrollView.bounds.height * (-1)
             self.view.layoutIfNeeded()
         }
     }
     
     fileprivate func setupDetailsTextView() {
     
+        let keyAttributes = [NSFontAttributeName: Constants.Font.medium1!, NSForegroundColorAttributeName: Constants.Color.light]
+        let valueAttributes = [NSFontAttributeName: Constants.Font.medium1!, NSForegroundColorAttributeName: Constants.Color.yellow]
         
+        let rating = String.localizedStringWithFormat("%.2f", model?.movie?.rating as? Double ?? 0)
+        let genres = (model?.movie?.genres ?? []).joined(separator: ", ")
+        
+        let key1 = NSMutableAttributedString(string: "\(Constants.Text.releaseDate): ", attributes: keyAttributes)
+        let value1 = NSAttributedString(string: "\(model?.movie?.released ?? "---")\n", attributes: valueAttributes)
+        let key2 = NSAttributedString(string: "\(Constants.Text.runtime): ", attributes: keyAttributes)
+        let value2 = NSAttributedString(string: "\(model?.movie?.runtime ?? 0)\n", attributes: valueAttributes)
+        let key3 = NSAttributedString(string: "\(Constants.Text.tagline): ", attributes: keyAttributes)
+        let value3 = NSAttributedString(string: "\(model?.movie?.tagline ?? "---")\n", attributes: valueAttributes)
+        let key4 = NSAttributedString(string: "\(Constants.Text.rating): ", attributes: keyAttributes)
+        let value4 = NSAttributedString(string: "\(rating)\n", attributes: valueAttributes)
+        let key5 = NSAttributedString(string: "\(Constants.Text.genres): ", attributes: keyAttributes)
+        let value5 = NSAttributedString(string: "\(genres)\n", attributes: valueAttributes)
+        let key6 = NSAttributedString(string: "\(Constants.Text.overview): ", attributes: keyAttributes)
+        let value6 = NSAttributedString(string: "\(model?.movie?.overview ?? "---")", attributes: valueAttributes)
+        
+        key1.append(value1)
+        key1.append(key2)
+        key1.append(value2)
+        key1.append(key3)
+        key1.append(value3)
+        key1.append(key4)
+        key1.append(value4)
+        key1.append(key5)
+        key1.append(value5)
+        key1.append(key6)
+        key1.append(value6)
+        
+        detailsTextLabel.attributedText = key1
+        heightConstraintDetailsTextLabel.constant = CGFloat.heightWithConstrainedWidth(string: detailsTextLabel.text ?? "---", width: detailsTextLabel.bounds.width, font: Constants.Font.medium1!) + 50
     }
     
     fileprivate func setupScrollView() {
         scrollView.setContentOffset(.zero, animated: true)
-        scrollView.contentSize = CGSize(width: 0, height: heightConstraintDetailsTextView.constant + heightConstraintContentGalleryView.constant + (3 * Constraint.spaceBetweenItemsInScrollView))
+        scrollView.contentSize = CGSize(width: 0, height: heightConstraintDetailsTextLabel.constant + heightConstraintContentGalleryView.constant + heightConstraintGalleryLabel.constant + (3 * Constraint.spaceBetweenItemsInScrollView + 8))
         scrollView.isScrollEnabled = true
-        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
     }
     

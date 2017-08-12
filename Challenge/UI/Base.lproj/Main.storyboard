@@ -175,14 +175,24 @@ Retry?</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXd-v6-Ofa">
                                 <rect key="frame" x="0.0" y="264" width="375" height="403"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MAN-q2-ell">
-                                        <rect key="frame" x="20" y="20" width="335" height="186"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwJ-21-wd6">
+                                        <rect key="frame" x="20" y="20" width="335" height="148"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="186" id="RAc-bC-rfW"/>
+                                            <constraint firstAttribute="height" constant="148" id="FuW-qt-Imk"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gallery:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiM-yI-9xR">
+                                        <rect key="frame" x="20" y="188" width="335" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="lT1-sH-aJR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5x-b7-iuy">
                                         <rect key="frame" x="20" y="226" width="335" height="157"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -192,14 +202,17 @@ Retry?</string>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="MAN-q2-ell" secondAttribute="trailing" constant="20" id="Cef-gD-5EX"/>
-                                    <constraint firstItem="MAN-q2-ell" firstAttribute="top" secondItem="AXd-v6-Ofa" secondAttribute="top" constant="20" id="NNI-Ak-soF"/>
-                                    <constraint firstItem="MAN-q2-ell" firstAttribute="leading" secondItem="AXd-v6-Ofa" secondAttribute="leading" constant="20" id="RzE-Er-1ZA"/>
-                                    <constraint firstItem="MAN-q2-ell" firstAttribute="centerX" secondItem="AXd-v6-Ofa" secondAttribute="centerX" id="SVe-Pa-dFG"/>
-                                    <constraint firstAttribute="bottom" secondItem="b5x-b7-iuy" secondAttribute="bottom" constant="20" id="aix-xs-i0d"/>
-                                    <constraint firstItem="b5x-b7-iuy" firstAttribute="trailing" secondItem="MAN-q2-ell" secondAttribute="trailing" id="eic-j5-CTf"/>
-                                    <constraint firstItem="b5x-b7-iuy" firstAttribute="top" secondItem="MAN-q2-ell" secondAttribute="bottom" constant="20" id="hp8-iu-2Vk"/>
-                                    <constraint firstItem="b5x-b7-iuy" firstAttribute="leading" secondItem="MAN-q2-ell" secondAttribute="leading" id="q7G-gI-Okv"/>
+                                    <constraint firstItem="jwJ-21-wd6" firstAttribute="top" secondItem="AXd-v6-Ofa" secondAttribute="top" constant="20" id="894-uu-0lF"/>
+                                    <constraint firstItem="b5x-b7-iuy" firstAttribute="trailing" secondItem="qiM-yI-9xR" secondAttribute="trailing" id="CTu-R4-an5"/>
+                                    <constraint firstItem="b5x-b7-iuy" firstAttribute="leading" secondItem="qiM-yI-9xR" secondAttribute="leading" id="LDg-No-pPT"/>
+                                    <constraint firstItem="jwJ-21-wd6" firstAttribute="centerX" secondItem="AXd-v6-Ofa" secondAttribute="centerX" id="PvW-QA-MMY"/>
+                                    <constraint firstAttribute="trailing" secondItem="jwJ-21-wd6" secondAttribute="trailing" constant="20" id="Yyz-nC-o0e"/>
+                                    <constraint firstItem="qiM-yI-9xR" firstAttribute="top" secondItem="jwJ-21-wd6" secondAttribute="bottom" constant="20" id="bVP-xi-UKa"/>
+                                    <constraint firstAttribute="bottom" secondItem="b5x-b7-iuy" secondAttribute="bottom" constant="20" id="plH-x0-tAr"/>
+                                    <constraint firstItem="qiM-yI-9xR" firstAttribute="trailing" secondItem="jwJ-21-wd6" secondAttribute="trailing" id="sAz-69-UZl"/>
+                                    <constraint firstItem="jwJ-21-wd6" firstAttribute="leading" secondItem="AXd-v6-Ofa" secondAttribute="leading" constant="20" id="tx9-IS-7lh"/>
+                                    <constraint firstItem="qiM-yI-9xR" firstAttribute="leading" secondItem="jwJ-21-wd6" secondAttribute="leading" id="wMW-fb-whM"/>
+                                    <constraint firstItem="b5x-b7-iuy" firstAttribute="top" secondItem="qiM-yI-9xR" secondAttribute="bottom" constant="8" id="zuN-dV-ZFB"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -219,7 +232,6 @@ Retry?</string>
                             <constraint firstItem="fGz-ei-2vq" firstAttribute="centerX" secondItem="MRe-A0-fap" secondAttribute="centerX" id="WWP-MJ-fj1"/>
                             <constraint firstItem="lhy-TA-Qdi" firstAttribute="centerX" secondItem="MRe-A0-fap" secondAttribute="centerX" id="eYE-kc-7J1"/>
                             <constraint firstItem="DRh-a4-bbh" firstAttribute="centerY" secondItem="MRe-A0-fap" secondAttribute="centerY" id="ikj-Pi-qk5"/>
-                            <constraint firstItem="AXd-v6-Ofa" firstAttribute="centerX" secondItem="MRe-A0-fap" secondAttribute="centerX" id="mR9-x8-XlN"/>
                             <constraint firstItem="AXd-v6-Ofa" firstAttribute="trailing" secondItem="MRe-A0-fap" secondAttribute="trailing" id="oTi-Nk-dpF"/>
                             <constraint firstItem="AXd-v6-Ofa" firstAttribute="top" secondItem="MRe-A0-fap" secondAttribute="bottom" id="p0Z-y2-Elw"/>
                             <constraint firstItem="MRe-A0-fap" firstAttribute="top" secondItem="x6X-f9-78g" secondAttribute="bottom" id="p7d-XT-tBN"/>
@@ -232,9 +244,10 @@ Retry?</string>
                         <outlet property="activityIndicator" destination="DRh-a4-bbh" id="HCE-HI-Eld"/>
                         <outlet property="backgroundImage" destination="4VP-qY-kIi" id="8d6-Ik-CKe"/>
                         <outlet property="bottomConstraintScrollView" destination="vI1-gm-ZzT" id="Vdq-cC-Nv8"/>
-                        <outlet property="detailsTextView" destination="MAN-q2-ell" id="AVe-LI-dzf"/>
+                        <outlet property="detailsTextLabel" destination="jwJ-21-wd6" id="1Xf-4q-xuI"/>
                         <outlet property="heightConstraintContentGalleryView" destination="ere-Fy-gty" id="Ka4-MN-mWp"/>
-                        <outlet property="heightConstraintDetailsTextView" destination="RAc-bC-rfW" id="69h-SN-enx"/>
+                        <outlet property="heightConstraintDetailsTextLabel" destination="FuW-qt-Imk" id="lWO-19-hrk"/>
+                        <outlet property="heightConstraintGalleryLabel" destination="lT1-sH-aJR" id="lM3-f0-0ka"/>
                         <outlet property="heightConstraintWebView" destination="5Jx-Zp-kTm" id="zLY-nF-tyS"/>
                         <outlet property="labelError" destination="lhy-TA-Qdi" id="jT0-8t-le5"/>
                         <outlet property="navigationView" destination="x6X-f9-78g" id="1Qf-gP-OLp"/>
@@ -248,7 +261,7 @@ Retry?</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j9v-BL-gaF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="pAy-dG-ciK"/>
             </objects>
-            <point key="canvasLocation" x="868" y="136.28185907046478"/>
+            <point key="canvasLocation" x="855" y="137"/>
         </scene>
     </scenes>
 </document>

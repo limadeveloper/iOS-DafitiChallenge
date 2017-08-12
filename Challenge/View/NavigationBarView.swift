@@ -59,7 +59,7 @@ class NavigationBarView: UIView {
         guard let model = model else { return }
         
         titleLabel.text = model.movie?.title
-        titleLabel.font = Constants.Font.regularBold
+        titleLabel.font = Constants.Font.bold2
         titleLabel.textColor = Constants.Color.light
         titleLabel.shadowColor = Constants.Color.dark
         titleLabel.shadowOffset = CGSize(width: 0, height: 2)

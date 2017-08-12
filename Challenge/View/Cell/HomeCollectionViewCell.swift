@@ -26,14 +26,14 @@ class HomeCollectionViewCell: UICollectionViewCell {
             guard let model = model else { return }
             
             titleLabel.text = model.movie?.title?.uppercased()
-            titleLabel.font = Constants.Font.biggerBold
+            titleLabel.font = Constants.Font.bold1
             titleLabel.textColor = Constants.Color.yellow
             titleLabel.shadowColor = Constants.Color.dark
             titleLabel.shadowOffset = CGSize(width: 0, height: 5)
             
             subtitleLabel.text = model.movie?.released
             subtitleLabel.textColor = Constants.Color.yellow
-            subtitleLabel.font = Constants.Font.regularBold
+            subtitleLabel.font = Constants.Font.bold2
             subtitleLabel.shadowColor = Constants.Color.dark
             subtitleLabel.shadowOffset = CGSize(width: 0, height: 3)
             

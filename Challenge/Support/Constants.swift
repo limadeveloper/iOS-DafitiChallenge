@@ -94,6 +94,13 @@ struct Constants {
         static let error = "Error"
         static let done = "Ok"
         static let movies = "Movies"
+        static let releaseDate = "Release date"
+        static let runtime = "Runtime"
+        static let tagline = "Tagline"
+        static let overview = "Overview"
+        static let rating = "Rating"
+        static let genres = "Genres"
+        static let gallery = "Gallery"
     }
     
     struct Color {
@@ -113,9 +120,21 @@ struct Constants {
             static let semibold = "Poppins-SemiBold"
         }
         
-        static let biggerBold = UIFont(name: Name.bold, size: 32)
-        static let regularBold = UIFont(name: Name.bold, size: 22)
-        static let smallBold = UIFont(name: Name.bold, size: 17)
+        
+        /// Font bold and size 32
+        static let bold1 = UIFont(name: Name.bold, size: 32)
+        
+        /// Font bold and size 22
+        static let bold2 = UIFont(name: Name.bold, size: 22)
+        
+        /// Font bold and size 17
+        static let bold3 = UIFont(name: Name.bold, size: 17)
+        
+        /// Font medium and size 17
+        static let medium1 = UIFont(name: Name.medium, size: 17)
+        
+        /// Font regular and size 17
+        static let regular1 = UIFont(name: Name.regular, size: 17)
     }
     
     struct UI {
