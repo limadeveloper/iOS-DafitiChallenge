@@ -59,9 +59,14 @@ class NavigationBarView: UIView {
         guard let model = model else { return }
         
         titleLabel.text = model.movie?.title
-        titleLabel.font = Constants.Font.smallBold
-        titleLabel.textColor = Constants.Color.yellow
+        titleLabel.font = Constants.Font.regularBold
+        titleLabel.textColor = Constants.Color.light
         titleLabel.shadowColor = Constants.Color.dark
         titleLabel.shadowOffset = CGSize(width: 0, height: 2)
+        
+        if let url = model.movie?.image?.selectedUrl {
+            backgroundImage.af_setImage(withURL: url)
+            backgroundImage.blur()
+        }
     }
 }

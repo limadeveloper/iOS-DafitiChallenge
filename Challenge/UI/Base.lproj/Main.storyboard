@@ -8,6 +8,11 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Home Controller-->
         <scene sceneID="fcw-dD-Yz8">
@@ -103,7 +108,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Arp-Lv-uNv" id="rvf-Is-Vxb"/>
-                        <segue destination="ZM8-ro-0oG" kind="presentation" identifier="Details" id="xn3-rI-UJe"/>
+                        <segue destination="ZM8-ro-0oG" kind="presentation" identifier="Details" modalPresentationStyle="formSheet" id="xn3-rI-UJe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5k-jk-Yf5" sceneMemberID="firstResponder"/>
@@ -142,29 +147,65 @@
                                     <outlet property="delegate" destination="ZM8-ro-0oG" id="J9e-WZ-tbW"/>
                                 </connections>
                             </webView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="DRh-a4-bbh">
+                                <rect key="frame" x="169" y="145" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGz-ei-2vq">
+                                <rect key="frame" x="84" y="139.5" width="206" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="FWX-FI-nAl"/>
+                                    <constraint firstAttribute="width" constant="206" id="zWd-qR-2AT"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhy-TA-Qdi">
+                                <rect key="frame" x="84" y="139.5" width="206" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="206" id="53B-bE-feb"/>
+                                    <constraint firstAttribute="height" constant="50" id="MWw-1Q-RDw"/>
+                                </constraints>
+                                <string key="text">Something wrong.
+Retry?</string>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="4VP-qY-kIi" secondAttribute="trailing" id="6VO-8C-odz"/>
                             <constraint firstItem="4VP-qY-kIi" firstAttribute="leading" secondItem="A8M-2n-Ch8" secondAttribute="leading" id="A9r-Ni-13j"/>
                             <constraint firstAttribute="trailing" secondItem="MRe-A0-fap" secondAttribute="trailing" id="DkR-bR-aBU"/>
+                            <constraint firstItem="fGz-ei-2vq" firstAttribute="centerY" secondItem="MRe-A0-fap" secondAttribute="centerY" id="GBm-ZT-xz8"/>
+                            <constraint firstItem="DRh-a4-bbh" firstAttribute="centerX" secondItem="MRe-A0-fap" secondAttribute="centerX" id="Gaj-nQ-wXf"/>
                             <constraint firstItem="x6X-f9-78g" firstAttribute="leading" secondItem="A8M-2n-Ch8" secondAttribute="leading" id="IG5-Uu-o4v"/>
                             <constraint firstAttribute="trailing" secondItem="x6X-f9-78g" secondAttribute="trailing" id="IdW-vq-VgV"/>
                             <constraint firstAttribute="topMargin" secondItem="x6X-f9-78g" secondAttribute="top" id="Iqd-YW-Sc3"/>
                             <constraint firstAttribute="topMargin" secondItem="4VP-qY-kIi" secondAttribute="top" id="Pdw-vp-3qk"/>
                             <constraint firstItem="MRe-A0-fap" firstAttribute="leading" secondItem="A8M-2n-Ch8" secondAttribute="leading" id="Rca-5G-ahQ"/>
+                            <constraint firstItem="fGz-ei-2vq" firstAttribute="centerX" secondItem="MRe-A0-fap" secondAttribute="centerX" id="WWP-MJ-fj1"/>
+                            <constraint firstItem="lhy-TA-Qdi" firstAttribute="centerX" secondItem="MRe-A0-fap" secondAttribute="centerX" id="eYE-kc-7J1"/>
+                            <constraint firstItem="DRh-a4-bbh" firstAttribute="centerY" secondItem="MRe-A0-fap" secondAttribute="centerY" id="ikj-Pi-qk5"/>
                             <constraint firstItem="MRe-A0-fap" firstAttribute="top" secondItem="x6X-f9-78g" secondAttribute="bottom" id="p7d-XT-tBN"/>
+                            <constraint firstItem="lhy-TA-Qdi" firstAttribute="centerY" secondItem="MRe-A0-fap" secondAttribute="centerY" id="tGW-kl-59h"/>
                             <constraint firstAttribute="bottomMargin" secondItem="4VP-qY-kIi" secondAttribute="bottom" id="vvu-hg-t5W"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="DRh-a4-bbh" id="HCE-HI-Eld"/>
                         <outlet property="backgroundImage" destination="4VP-qY-kIi" id="8d6-Ik-CKe"/>
                         <outlet property="heightConstraintWebView" destination="5Jx-Zp-kTm" id="zLY-nF-tyS"/>
+                        <outlet property="labelError" destination="lhy-TA-Qdi" id="jT0-8t-le5"/>
                         <outlet property="navigationView" destination="x6X-f9-78g" id="1Qf-gP-OLp"/>
+                        <outlet property="tapGesture" destination="pAy-dG-ciK" id="nfh-Wv-xwW"/>
+                        <outlet property="viewError" destination="fGz-ei-2vq" id="ep9-UT-3M9"/>
                         <outlet property="webView" destination="MRe-A0-fap" id="UV1-1g-hMU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j9v-BL-gaF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="pAy-dG-ciK"/>
             </objects>
             <point key="canvasLocation" x="868" y="136.28185907046478"/>
         </scene>

@@ -32,13 +32,4 @@ class CustomButton: UIButton {
             layer.borderColor = borderColor.cgColor
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        layer.cornerRadius = cornerRadius
-        layer.masksToBounds = cornerRadius > 0
-        layer.borderWidth = borderWidth
-        layer.borderColor = borderColor.cgColor
-    }
 }

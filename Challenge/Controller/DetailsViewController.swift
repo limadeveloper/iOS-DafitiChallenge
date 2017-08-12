@@ -14,6 +14,10 @@ class DetailsViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet fileprivate weak var navigationView: UIView!
     @IBOutlet fileprivate weak var backgroundImage: UIImageView!
+    @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet fileprivate weak var tapGesture: UITapGestureRecognizer!
+    @IBOutlet fileprivate weak var labelError: UILabel!
+    @IBOutlet fileprivate weak var viewError: UIView!
     @IBOutlet fileprivate weak var webView: UIWebView!
     @IBOutlet fileprivate weak var heightConstraintWebView: NSLayoutConstraint!
     
@@ -24,18 +28,6 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         
         updateUI()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        heightConstraintWebView.constant = 0
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        loadWebView()
     }
     
     // MARK: - Actions
@@ -51,17 +43,27 @@ class DetailsViewController: UIViewController {
         navigationBarView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         navigationBarView.backgroundColor = .clear
         navigationBarView.model = model
-        navigationBarView.setShadow(enable: true)
+        navigationBarView.setShadow(enable: true, shadowOpacity: 0.40)
         navigationBarView.delegate = self
         
         navigationView.addSubview(navigationBarView)
+        
+        tapGesture.addTarget(self, action: #selector(tapOnLabelError))
+        labelError.addGestureRecognizer(tapGesture)
+        
+        viewError.layer.cornerRadius = 3
+        
+        hideError()
+        
+        loadWebView()
     }
     
     fileprivate func loadWebView() {
         
         webView.isOpaque = false
         webView.backgroundColor = .clear
-        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.isScrollEnabled = true
+        webView.delegate = self
         
         let width = view.frame.size.width
         let height = (width/320) * 275
@@ -74,6 +76,15 @@ class DetailsViewController: UIViewController {
         
         webView.loadRequest(request)
     }
+    
+    fileprivate func hideError(isHidden: Bool = true) {
+        viewError.isHidden = isHidden
+        labelError.isHidden = isHidden
+    }
+    
+    @objc fileprivate func tapOnLabelError() {
+        loadWebView()
+    }
 }
 
 extension DetailsViewController: NavigationBarViewDelegate {
@@ -81,5 +92,23 @@ extension DetailsViewController: NavigationBarViewDelegate {
         dismiss(animated: true) {
             self.webView.stopLoading()
         }
+    }
+}
+
+extension DetailsViewController: UIWebViewDelegate {
+    
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        activityIndicator.startAnimating()
+        hideError()
+    }
+    
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        activityIndicator.stopAnimating()
+        hideError(isHidden: false)
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        activityIndicator.stopAnimating()
+        hideError()
     }
 }
