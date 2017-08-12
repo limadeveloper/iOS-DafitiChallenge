@@ -19,6 +19,8 @@ struct Movie {
     let overview: String?
     let rating: NSNumber?
     let released: String?
+    let runtime: Int?
+    let tagline: String?
     let title: String?
     let trailerUrl: String?
     let updatedAt: String?
@@ -34,6 +36,8 @@ struct Movie {
         overview = json?[Keys.overview] as? String
         rating = json?[Keys.rating] as? NSNumber
         released = json?[Keys.released] as? String
+        runtime = json?[Keys.runtime] as? Int
+        tagline = json?[Keys.tagline] as? String
         title = json?[Keys.title] as? String
         trailerUrl = json?[Keys.trailerUrl] as? String
         updatedAt = json?[Keys.updatedAt] as? String
@@ -49,6 +53,8 @@ struct Movie {
         static let overview = "overview"
         static let rating = "rating"
         static let released = "released"
+        static let runtime = "runtime"
+        static let tagline = "tagline"
         static let title = "title"
         static let trailerUrl = "trailer"
         static let updatedAt = "updated_at"

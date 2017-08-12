@@ -151,7 +151,7 @@
                                 <rect key="frame" x="169" y="145" width="37" height="37"/>
                             </activityIndicatorView>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGz-ei-2vq">
-                                <rect key="frame" x="84" y="139.5" width="206" height="50"/>
+                                <rect key="frame" x="84" y="139" width="206" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FWX-FI-nAl"/>
@@ -159,7 +159,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhy-TA-Qdi">
-                                <rect key="frame" x="84" y="139.5" width="206" height="50"/>
+                                <rect key="frame" x="84" y="139" width="206" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="206" id="53B-bE-feb"/>
                                     <constraint firstAttribute="height" constant="50" id="MWw-1Q-RDw"/>
@@ -172,6 +172,36 @@ Retry?</string>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXd-v6-Ofa">
+                                <rect key="frame" x="0.0" y="264" width="375" height="403"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MAN-q2-ell">
+                                        <rect key="frame" x="20" y="20" width="335" height="186"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="186" id="RAc-bC-rfW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5x-b7-iuy">
+                                        <rect key="frame" x="20" y="226" width="335" height="157"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="157" id="ere-Fy-gty"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="MAN-q2-ell" secondAttribute="trailing" constant="20" id="Cef-gD-5EX"/>
+                                    <constraint firstItem="MAN-q2-ell" firstAttribute="top" secondItem="AXd-v6-Ofa" secondAttribute="top" constant="20" id="NNI-Ak-soF"/>
+                                    <constraint firstItem="MAN-q2-ell" firstAttribute="leading" secondItem="AXd-v6-Ofa" secondAttribute="leading" constant="20" id="RzE-Er-1ZA"/>
+                                    <constraint firstItem="MAN-q2-ell" firstAttribute="centerX" secondItem="AXd-v6-Ofa" secondAttribute="centerX" id="SVe-Pa-dFG"/>
+                                    <constraint firstAttribute="bottom" secondItem="b5x-b7-iuy" secondAttribute="bottom" constant="20" id="aix-xs-i0d"/>
+                                    <constraint firstItem="b5x-b7-iuy" firstAttribute="trailing" secondItem="MAN-q2-ell" secondAttribute="trailing" id="eic-j5-CTf"/>
+                                    <constraint firstItem="b5x-b7-iuy" firstAttribute="top" secondItem="MAN-q2-ell" secondAttribute="bottom" constant="20" id="hp8-iu-2Vk"/>
+                                    <constraint firstItem="b5x-b7-iuy" firstAttribute="leading" secondItem="MAN-q2-ell" secondAttribute="leading" id="q7G-gI-Okv"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -185,20 +215,30 @@ Retry?</string>
                             <constraint firstAttribute="topMargin" secondItem="x6X-f9-78g" secondAttribute="top" id="Iqd-YW-Sc3"/>
                             <constraint firstAttribute="topMargin" secondItem="4VP-qY-kIi" secondAttribute="top" id="Pdw-vp-3qk"/>
                             <constraint firstItem="MRe-A0-fap" firstAttribute="leading" secondItem="A8M-2n-Ch8" secondAttribute="leading" id="Rca-5G-ahQ"/>
+                            <constraint firstItem="AXd-v6-Ofa" firstAttribute="leading" secondItem="MRe-A0-fap" secondAttribute="leading" id="Use-xY-hlc"/>
                             <constraint firstItem="fGz-ei-2vq" firstAttribute="centerX" secondItem="MRe-A0-fap" secondAttribute="centerX" id="WWP-MJ-fj1"/>
                             <constraint firstItem="lhy-TA-Qdi" firstAttribute="centerX" secondItem="MRe-A0-fap" secondAttribute="centerX" id="eYE-kc-7J1"/>
                             <constraint firstItem="DRh-a4-bbh" firstAttribute="centerY" secondItem="MRe-A0-fap" secondAttribute="centerY" id="ikj-Pi-qk5"/>
+                            <constraint firstItem="AXd-v6-Ofa" firstAttribute="centerX" secondItem="MRe-A0-fap" secondAttribute="centerX" id="mR9-x8-XlN"/>
+                            <constraint firstItem="AXd-v6-Ofa" firstAttribute="trailing" secondItem="MRe-A0-fap" secondAttribute="trailing" id="oTi-Nk-dpF"/>
+                            <constraint firstItem="AXd-v6-Ofa" firstAttribute="top" secondItem="MRe-A0-fap" secondAttribute="bottom" id="p0Z-y2-Elw"/>
                             <constraint firstItem="MRe-A0-fap" firstAttribute="top" secondItem="x6X-f9-78g" secondAttribute="bottom" id="p7d-XT-tBN"/>
                             <constraint firstItem="lhy-TA-Qdi" firstAttribute="centerY" secondItem="MRe-A0-fap" secondAttribute="centerY" id="tGW-kl-59h"/>
+                            <constraint firstItem="AXd-v6-Ofa" firstAttribute="bottom" secondItem="pq8-4B-YLr" secondAttribute="top" id="vI1-gm-ZzT"/>
                             <constraint firstAttribute="bottomMargin" secondItem="4VP-qY-kIi" secondAttribute="bottom" id="vvu-hg-t5W"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="DRh-a4-bbh" id="HCE-HI-Eld"/>
                         <outlet property="backgroundImage" destination="4VP-qY-kIi" id="8d6-Ik-CKe"/>
+                        <outlet property="bottomConstraintScrollView" destination="vI1-gm-ZzT" id="Vdq-cC-Nv8"/>
+                        <outlet property="detailsTextView" destination="MAN-q2-ell" id="AVe-LI-dzf"/>
+                        <outlet property="heightConstraintContentGalleryView" destination="ere-Fy-gty" id="Ka4-MN-mWp"/>
+                        <outlet property="heightConstraintDetailsTextView" destination="RAc-bC-rfW" id="69h-SN-enx"/>
                         <outlet property="heightConstraintWebView" destination="5Jx-Zp-kTm" id="zLY-nF-tyS"/>
                         <outlet property="labelError" destination="lhy-TA-Qdi" id="jT0-8t-le5"/>
                         <outlet property="navigationView" destination="x6X-f9-78g" id="1Qf-gP-OLp"/>
+                        <outlet property="scrollView" destination="AXd-v6-Ofa" id="TZE-74-5DO"/>
                         <outlet property="tapGesture" destination="pAy-dG-ciK" id="nfh-Wv-xwW"/>
                         <outlet property="topConstraintNavigationView" destination="Iqd-YW-Sc3" id="d50-wp-hrf"/>
                         <outlet property="viewError" destination="fGz-ei-2vq" id="ep9-UT-3M9"/>

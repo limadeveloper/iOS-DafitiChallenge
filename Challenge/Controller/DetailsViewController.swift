@@ -19,8 +19,13 @@ class DetailsViewController: UIViewController {
     @IBOutlet fileprivate weak var labelError: UILabel!
     @IBOutlet fileprivate weak var viewError: UIView!
     @IBOutlet fileprivate weak var webView: UIWebView!
+    @IBOutlet fileprivate weak var scrollView: UIScrollView!
+    @IBOutlet fileprivate weak var detailsTextView: UITextView!
     @IBOutlet fileprivate weak var heightConstraintWebView: NSLayoutConstraint!
     @IBOutlet fileprivate weak var topConstraintNavigationView: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var bottomConstraintScrollView: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var heightConstraintDetailsTextView: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var heightConstraintContentGalleryView: NSLayoutConstraint!
     
     var model: Model?
     var lastControllerRotationStatus: Bool?
@@ -29,6 +34,8 @@ class DetailsViewController: UIViewController {
     struct Constraint {
         static let topNavigationViewIsHidden: CGFloat = 64
         static let topNavigationViewIsShow: CGFloat = 0
+        static let bottomScrollViewIsShow: CGFloat = 0
+        static let spaceBetweenItemsInScrollView: CGFloat = 20
     }
     
     // MARK: - View LifeCycle
@@ -59,6 +66,8 @@ class DetailsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        guard UIDevice.current.userInterfaceIdiom != .pad else { return }
+        
         let height = UIScreen.main.bounds.height
         let width = UIScreen.main.bounds.width
         
@@ -70,6 +79,7 @@ class DetailsViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        guard UIDevice.current.userInterfaceIdiom != .pad else { return }
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
             isPortrait()
         }else if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
@@ -101,8 +111,9 @@ class DetailsViewController: UIViewController {
         viewError.layer.cornerRadius = 3
         
         hideError()
-        
         loadWebView()
+        setupDetailsTextView()
+        setupScrollView()
     }
     
     fileprivate func loadWebView(withHeight: CGFloat? = nil) {
@@ -132,6 +143,7 @@ class DetailsViewController: UIViewController {
     fileprivate func isPortrait() {
         UIView.animate(withDuration: 0.5) { 
             self.topConstraintNavigationView.constant = Constraint.topNavigationViewIsShow
+            self.bottomConstraintScrollView.constant = Constraint.bottomScrollViewIsShow
             self.view.layoutIfNeeded()
         }
     }
@@ -139,8 +151,22 @@ class DetailsViewController: UIViewController {
     fileprivate func isLandscape() {
         UIView.animate(withDuration: 0.5) {
             self.topConstraintNavigationView.constant = Constraint.topNavigationViewIsHidden
+            self.bottomConstraintScrollView.constant = self.scrollView.frame.size.height * (-1)
             self.view.layoutIfNeeded()
         }
+    }
+    
+    fileprivate func setupDetailsTextView() {
+    
+        
+    }
+    
+    fileprivate func setupScrollView() {
+        scrollView.setContentOffset(.zero, animated: true)
+        scrollView.contentSize = CGSize(width: 0, height: heightConstraintDetailsTextView.constant + heightConstraintContentGalleryView.constant + (3 * Constraint.spaceBetweenItemsInScrollView))
+        scrollView.isScrollEnabled = true
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
     }
     
     @objc fileprivate func tapOnLabelError() {
