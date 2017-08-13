@@ -162,6 +162,10 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate {
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        NotificationCenter.default.removeObserver(cell, name: Constants.NotificationObserver.Name.didClickOnLikedButton, object: nil)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? HomeCollectionViewCell
         selectedImage = cell?.imageView.image

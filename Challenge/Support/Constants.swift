@@ -108,7 +108,7 @@ struct Constants {
         static let light = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         static let yellow = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         static let lightYellow = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
-        static let liked = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        static let liked = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
     }
     
     struct Font {
@@ -149,6 +149,20 @@ struct Constants {
         
         struct XIB {
             static let navigationBarView = "NavigationBarView"
+        }
+    }
+    
+    struct Persistence {
+        struct Key {
+            static func getKeyLike(byId: Any) -> String {
+                return "liked_\(byId)"
+            }
+        }
+    }
+    
+    struct NotificationObserver {
+        struct Name {
+            static let didClickOnLikedButton = Notification.Name("didClickOnLikedButton")
         }
     }
 }

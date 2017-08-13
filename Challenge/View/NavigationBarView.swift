@@ -59,8 +59,22 @@ class NavigationBarView: UIView {
     }
     
     @IBAction fileprivate func like(sender: UIButton) {
-        sender.setImage(#imageLiteral(resourceName: "Liked"), for: .normal)
-        sender.tintColor = Constants.Color.liked
+        
+        guard let id = model?.movie?.id?.trakt else { return }
+        
+        if UserDefaults.standard.bool(forKey: Constants.Persistence.Key.getKeyLike(byId: id)) {
+            UserDefaults.standard.set(false, forKey: Constants.Persistence.Key.getKeyLike(byId: id))
+            sender.setImage(#imageLiteral(resourceName: "Like"), for: .normal)
+            sender.tintColor = Constants.Color.dark
+        }else {
+            UserDefaults.standard.set(true, forKey: Constants.Persistence.Key.getKeyLike(byId: id))
+            sender.setImage(#imageLiteral(resourceName: "Liked"), for: .normal)
+            sender.tintColor = Constants.Color.liked
+        }
+        
+        UserDefaults.standard.synchronize()
+        
+        NotificationCenter.default.post(name: Constants.NotificationObserver.Name.didClickOnLikedButton, object: nil)
     }
     
     fileprivate func updateUI() {
@@ -68,6 +82,14 @@ class NavigationBarView: UIView {
         contentView?.backgroundColor = .clear
         
         guard let model = model else { return }
+        
+        likeButton.setImage(#imageLiteral(resourceName: "Like"), for: .normal)
+        likeButton.tintColor = Constants.Color.dark
+        
+        if let id = model.movie?.id?.trakt, UserDefaults.standard.bool(forKey: Constants.Persistence.Key.getKeyLike(byId: id)) {
+            likeButton.setImage(#imageLiteral(resourceName: "Liked"), for: .normal)
+            likeButton.tintColor = Constants.Color.liked
+        }
         
         titleLabel.text = model.movie?.title
         titleLabel.textColor = Constants.Color.light

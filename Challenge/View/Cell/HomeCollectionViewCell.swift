@@ -15,6 +15,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var imageCoverView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
+    @IBOutlet fileprivate weak var likedButton: UIButton!
     @IBOutlet private weak var imageViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet private weak var titleLabelConstraintHeight: NSLayoutConstraint!
     
@@ -22,6 +23,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     var model: Model? {
         didSet {
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(didClickOnLikedButton(notification:)), name: Constants.NotificationObserver.Name.didClickOnLikedButton, object: nil)
             
             guard let model = model else { return }
             
@@ -46,6 +49,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
                 let titleHeight = CGFloat.heightWithConstrainedWidth(string: text, width: titleLabel.frame.size.width, font: titleLabel.font)
                 titleLabelConstraintHeight.constant = titleHeight + 12
             }
+            
+            updateLikedButton(by: model)
         }
     }
     
@@ -68,5 +73,22 @@ class HomeCollectionViewCell: UICollectionViewCell {
         subtitleLabel.alpha = delta
         
         imageViewConstraintHeight.constant = featuredHeight
+    }
+    
+    fileprivate func updateLikedButton(by model: Model?) {
+    
+        likedButton.setImage(nil, for: .normal)
+        likedButton.tintColor = .clear
+        
+        if let id = model?.movie?.id?.trakt, UserDefaults.standard.bool(forKey: Constants.Persistence.Key.getKeyLike(byId: id)) {
+            likedButton.setImage(#imageLiteral(resourceName: "Liked"), for: .normal)
+            likedButton.tintColor = Constants.Color.liked
+        }
+    }
+}
+
+extension HomeCollectionViewCell {
+    @objc func didClickOnLikedButton(notification: Notification) {
+        updateLikedButton(by: model)
     }
 }
