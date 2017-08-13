@@ -36,6 +36,11 @@ class Image {
         static let tmdbMovieBackdrop = "backdrops"
         static let tmdbMoviePoster = "posters"
     }
+    
+    enum ImageType {
+        case poster
+        case backdrop
+    }
 }
 
 extension Image {
@@ -70,4 +75,29 @@ extension Image {
     }
     
     class TMDBMovieBackdrop: TMDBMoviePoster {}
+}
+
+extension Image {
+    
+    func getBestImagesByWidth(min: Double = 700, max: Double = 1500, type: ImageType = .poster) -> [String]? {
+        
+        var imagesWidth = self.posters?.map({ $0.width ?? -1 }).filter({ $0 != -1 }).sorted(by: { Int($0) < Int($1) })
+        
+        if type == .backdrop {
+            var imagesWidth = self.backdrops?.map({ $0.width ?? -1 }).filter({ $0 != -1 }).sorted(by: { Int($0) < Int($1) })
+        }
+        
+        var bestWidth: NSNumber {
+            if let width = imagesWidth?.filter({ Double($0) > min && Double($0) < max }).first {
+                return width
+            }else {
+                return imagesWidth?.first ?? 0
+            }
+        }
+        
+        let filter = (type == .poster ? self.posters : self.backdrops)?.filter({ $0.width == bestWidth })
+        let urls = filter?.map({ $0.url ?? "-" }).filter({ $0 != "-" })
+        
+        return urls
+    }
 }

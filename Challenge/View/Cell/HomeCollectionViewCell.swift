@@ -11,7 +11,7 @@ import AlamofireImage
 
 class HomeCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet private weak var imageCoverView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
@@ -37,17 +37,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
             subtitleLabel.shadowColor = Constants.Color.dark
             subtitleLabel.shadowOffset = CGSize(width: 0, height: 3)
             
-            let imagesWidth = model.movie?.image?.posters?.map({ $0.width ?? -1 }).filter({ $0 != -1 }).sorted(by: { Int($0) < Int($1) })
-            
-            var bestWidth: NSNumber {
-                if let width = imagesWidth?.filter({ Double($0) > 700 && Double($0) < 1300 }).first {
-                    return width
-                }else {
-                    return imagesWidth?.first ?? 0
-                }
-            }
-            
-            if let photoString = model.movie?.image?.posters?.filter({ $0.width == bestWidth }).first?.url, let photoURL = URL(string: photoString) {
+            if let photoString = model.movie?.image?.getBestImagesByWidth()?.first, let photoURL = URL(string: photoString) {
                 model.movie?.image?.selectedUrl = photoURL
                 imageView.af_setImage(withURL: photoURL, placeholderImage: #imageLiteral(resourceName: "Placeholder"))
             }

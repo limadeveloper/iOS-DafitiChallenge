@@ -195,9 +195,48 @@ Retry?</string>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5x-b7-iuy">
                                         <rect key="frame" x="20" y="226" width="335" height="157"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <subviews>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RqF-ZA-hxj">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="157"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="cQ0-Zz-Az6">
+                                                    <size key="itemSize" width="112" height="157"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="b3S-Wv-5Sr">
+                                                        <rect key="frame" x="0.0" y="0.0" width="112" height="157"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                            <rect key="frame" x="0.0" y="0.0" width="112" height="157"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vqQ-pP-Yhf">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="112" height="157"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                        </view>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="vqQ-pP-Yhf" secondAttribute="bottom" id="61q-tb-WGB"/>
+                                                            <constraint firstItem="vqQ-pP-Yhf" firstAttribute="top" secondItem="b3S-Wv-5Sr" secondAttribute="top" id="Ogo-xi-1Ud"/>
+                                                            <constraint firstItem="vqQ-pP-Yhf" firstAttribute="leading" secondItem="b3S-Wv-5Sr" secondAttribute="leading" id="SO0-37-DFj"/>
+                                                            <constraint firstAttribute="trailing" secondItem="vqQ-pP-Yhf" secondAttribute="trailing" id="aCE-qn-k1p"/>
+                                                        </constraints>
+                                                    </collectionViewCell>
+                                                </cells>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="ZM8-ro-0oG" id="7OQ-OM-KUE"/>
+                                                    <outlet property="delegate" destination="ZM8-ro-0oG" id="7Zs-ub-s1m"/>
+                                                </connections>
+                                            </collectionView>
+                                        </subviews>
                                         <constraints>
+                                            <constraint firstItem="RqF-ZA-hxj" firstAttribute="top" secondItem="b5x-b7-iuy" secondAttribute="top" id="7Q1-O4-hl7"/>
+                                            <constraint firstAttribute="bottom" secondItem="RqF-ZA-hxj" secondAttribute="bottom" id="X4I-qf-kwU"/>
                                             <constraint firstAttribute="height" constant="157" id="ere-Fy-gty"/>
+                                            <constraint firstItem="RqF-ZA-hxj" firstAttribute="leading" secondItem="b5x-b7-iuy" secondAttribute="leading" id="mZ2-Uv-UZh"/>
+                                            <constraint firstAttribute="trailing" secondItem="RqF-ZA-hxj" secondAttribute="trailing" id="wAd-zb-gxt"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -236,14 +275,14 @@ Retry?</string>
                             <constraint firstItem="AXd-v6-Ofa" firstAttribute="top" secondItem="MRe-A0-fap" secondAttribute="bottom" id="p0Z-y2-Elw"/>
                             <constraint firstItem="MRe-A0-fap" firstAttribute="top" secondItem="x6X-f9-78g" secondAttribute="bottom" id="p7d-XT-tBN"/>
                             <constraint firstItem="lhy-TA-Qdi" firstAttribute="centerY" secondItem="MRe-A0-fap" secondAttribute="centerY" id="tGW-kl-59h"/>
-                            <constraint firstItem="AXd-v6-Ofa" firstAttribute="bottom" secondItem="pq8-4B-YLr" secondAttribute="top" id="vI1-gm-ZzT"/>
+                            <constraint firstItem="AXd-v6-Ofa" firstAttribute="bottom" secondItem="pq8-4B-YLr" secondAttribute="top" priority="250" id="vI1-gm-ZzT"/>
                             <constraint firstAttribute="bottomMargin" secondItem="4VP-qY-kIi" secondAttribute="bottom" id="vvu-hg-t5W"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="DRh-a4-bbh" id="HCE-HI-Eld"/>
                         <outlet property="backgroundImage" destination="4VP-qY-kIi" id="8d6-Ik-CKe"/>
-                        <outlet property="bottomConstraintScrollView" destination="vI1-gm-ZzT" id="Vdq-cC-Nv8"/>
+                        <outlet property="collectionView" destination="RqF-ZA-hxj" id="9J2-8T-GW3"/>
                         <outlet property="detailsTextLabel" destination="jwJ-21-wd6" id="1Xf-4q-xuI"/>
                         <outlet property="heightConstraintContentGalleryView" destination="ere-Fy-gty" id="Ka4-MN-mWp"/>
                         <outlet property="heightConstraintDetailsTextLabel" destination="FuW-qt-Imk" id="lWO-19-hrk"/>
@@ -256,12 +295,77 @@ Retry?</string>
                         <outlet property="topConstraintNavigationView" destination="Iqd-YW-Sc3" id="d50-wp-hrf"/>
                         <outlet property="viewError" destination="fGz-ei-2vq" id="ep9-UT-3M9"/>
                         <outlet property="webView" destination="MRe-A0-fap" id="UV1-1g-hMU"/>
+                        <segue destination="Hyd-ca-S7D" kind="presentation" identifier="Gallery" id="Owu-vE-4Af"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j9v-BL-gaF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="pAy-dG-ciK"/>
             </objects>
-            <point key="canvasLocation" x="855" y="137"/>
+            <point key="canvasLocation" x="853.60000000000002" y="136.28185907046478"/>
+        </scene>
+        <!--Gallery View Controller-->
+        <scene sceneID="4IY-ft-5ZD">
+            <objects>
+                <viewController id="Hyd-ca-S7D" customClass="GalleryViewController" customModule="Challenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EKM-K2-F7f"/>
+                        <viewControllerLayoutGuide type="bottom" id="uyV-V7-P73"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YVl-RV-cux">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jfD-v7-KBQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lfg-3x-t27">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Hyd-ca-S7D" id="b0i-fv-Nqs"/>
+                                </connections>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fap-9A-Re2" customClass="CustomButton" customModule="Challenge" customModuleProvider="target">
+                                <rect key="frame" x="319" y="24" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="RX2-NG-fzU"/>
+                                    <constraint firstAttribute="height" constant="36" id="sQ9-Ta-tj8"/>
+                                </constraints>
+                                <state key="normal" image="Cancel"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="18"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="dismissWithSender:" destination="Hyd-ca-S7D" eventType="touchUpInside" id="qfW-Zf-OKx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lfg-3x-t27" firstAttribute="leading" secondItem="YVl-RV-cux" secondAttribute="leading" id="2s3-hi-y6C"/>
+                            <constraint firstItem="Lfg-3x-t27" firstAttribute="top" secondItem="EKM-K2-F7f" secondAttribute="bottom" id="Doc-aB-d6g"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fap-9A-Re2" secondAttribute="trailing" constant="4" id="L7Z-k9-RYy"/>
+                            <constraint firstAttribute="topMargin" secondItem="jfD-v7-KBQ" secondAttribute="top" id="Nye-6s-QJG"/>
+                            <constraint firstItem="jfD-v7-KBQ" firstAttribute="leading" secondItem="YVl-RV-cux" secondAttribute="leading" id="PtO-0i-9kZ"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="jfD-v7-KBQ" secondAttribute="bottom" id="S1f-52-Qt5"/>
+                            <constraint firstItem="fap-9A-Re2" firstAttribute="top" secondItem="EKM-K2-F7f" secondAttribute="bottom" constant="24" id="Y6q-KU-bnP"/>
+                            <constraint firstAttribute="trailing" secondItem="Lfg-3x-t27" secondAttribute="trailing" id="gfu-kG-6cg"/>
+                            <constraint firstAttribute="trailing" secondItem="jfD-v7-KBQ" secondAttribute="trailing" id="p8g-GQ-v37"/>
+                            <constraint firstItem="uyV-V7-P73" firstAttribute="top" secondItem="Lfg-3x-t27" secondAttribute="bottom" id="uU1-3D-hQJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="jfD-v7-KBQ" id="ShN-RX-dC5"/>
+                        <outlet property="scrollView" destination="Lfg-3x-t27" id="tKY-hO-6TE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oi4-Kb-Pqy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1573.5999999999999" y="135.38230884557723"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Cancel" width="100" height="100"/>
+    </resources>
 </document>

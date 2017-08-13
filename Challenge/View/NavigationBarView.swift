@@ -11,6 +11,7 @@ import AlamofireImage
 
 protocol NavigationBarViewDelegate {
     func didClickOnDismiss(sender: UIButton)
+    func didClickOnShare(sender: UIButton)
 }
 
 class NavigationBarView: UIView {
@@ -18,6 +19,7 @@ class NavigationBarView: UIView {
     // MARK: - Properties
     @IBOutlet fileprivate weak var backgroundImage: UIImageView!
     @IBOutlet fileprivate weak var titleLabel: UILabel!
+    @IBOutlet fileprivate weak var likeButton: UIButton!
     
     fileprivate var contentView: UIView?
     
@@ -52,6 +54,15 @@ class NavigationBarView: UIView {
         delegate?.didClickOnDismiss(sender: sender)
     }
     
+    @IBAction fileprivate func share(sender: UIButton) {
+        delegate?.didClickOnShare(sender: sender)
+    }
+    
+    @IBAction fileprivate func like(sender: UIButton) {
+        sender.setImage(#imageLiteral(resourceName: "Liked"), for: .normal)
+        sender.tintColor = Constants.Color.liked
+    }
+    
     fileprivate func updateUI() {
         
         contentView?.backgroundColor = .clear
@@ -59,7 +70,6 @@ class NavigationBarView: UIView {
         guard let model = model else { return }
         
         titleLabel.text = model.movie?.title
-        titleLabel.font = Constants.Font.bold2
         titleLabel.textColor = Constants.Color.light
         titleLabel.shadowColor = Constants.Color.dark
         titleLabel.shadowOffset = CGSize(width: 0, height: 2)

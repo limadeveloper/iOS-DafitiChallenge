@@ -18,6 +18,7 @@ class HomeController: UIViewController {
     fileprivate let cellName = "cell"
     fileprivate var page = 1
     fileprivate let refreshControl = UIRefreshControl()
+    fileprivate var selectedImage: UIImage?
     
     // MARK: - View LifeCycle
     override func viewDidLoad() {
@@ -162,6 +163,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? HomeCollectionViewCell
+        selectedImage = cell?.imageView.image
         performSegue(withIdentifier: Constants.UI.Storyboard.Segue.details, sender: indexPath)
     }
 }
@@ -174,6 +177,7 @@ extension HomeController {
             guard let indexPath = sender as? IndexPath else { return }
             let controller = segue.destination as? DetailsViewController
             controller?.model = models?[indexPath.row]
+            controller?.selectedImage = selectedImage
         default:
             break
         }

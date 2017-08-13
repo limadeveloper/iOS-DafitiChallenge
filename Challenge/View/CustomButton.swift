@@ -16,6 +16,7 @@ class CustomButton: UIButton {
     var cornerRadius: CGFloat = 0 {
         didSet {
             layer.cornerRadius = cornerRadius
+            layer.masksToBounds = cornerRadius > 0
         }
     }
     

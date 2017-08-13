@@ -21,21 +21,25 @@ class DetailsViewController: UIViewController {
     @IBOutlet fileprivate weak var webView: UIWebView!
     @IBOutlet fileprivate weak var scrollView: UIScrollView!
     @IBOutlet fileprivate weak var detailsTextLabel: UILabel!
+    @IBOutlet fileprivate weak var collectionView: UICollectionView!
     @IBOutlet fileprivate weak var heightConstraintWebView: NSLayoutConstraint!
     @IBOutlet fileprivate weak var topConstraintNavigationView: NSLayoutConstraint!
-    @IBOutlet fileprivate weak var bottomConstraintScrollView: NSLayoutConstraint!
     @IBOutlet fileprivate weak var heightConstraintDetailsTextLabel: NSLayoutConstraint!
     @IBOutlet fileprivate weak var heightConstraintContentGalleryView: NSLayoutConstraint!
     @IBOutlet fileprivate weak var heightConstraintGalleryLabel: NSLayoutConstraint!
     
+    fileprivate var gallery = [String]()
+    fileprivate let cellName = "cell"
+    fileprivate var shareActivityVC: UIActivityViewController?
+    
     var model: Model?
+    var selectedImage: UIImage?
     var lastControllerRotationStatus: Bool?
     
     // MARK: - Structs, Enums...
     struct Constraint {
         static let topNavigationViewIsHidden: CGFloat = 64
         static let topNavigationViewIsShow: CGFloat = 0
-        static let bottomScrollViewIsShow: CGFloat = 0
         static let spaceBetweenItemsInScrollView: CGFloat = 20
     }
     
@@ -43,6 +47,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getData()
         updateUI()
     }
     
@@ -80,7 +85,10 @@ class DetailsViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        guard UIDevice.current.userInterfaceIdiom != .pad else { return }
+        guard UIDevice.current.userInterfaceIdiom != .pad else {
+            shareActivityVC?.dismiss(animated: true, completion: nil);
+            return
+        }
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
             isPortrait()
         }else if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
@@ -112,9 +120,15 @@ class DetailsViewController: UIViewController {
         viewError.layer.cornerRadius = 3
         
         hideError()
-        loadWebView()
-        setupDetailsTextView()
+        setupDetailsTextLabel()
         setupScrollView()
+        loadWebView()
+        
+        collectionView.reloadData()
+    }
+    
+    fileprivate func getData() {
+        gallery = model?.movie?.image?.backdrops?.map({ $0.url ?? "-" }).filter({ $0 != "-" }) ?? []
     }
     
     fileprivate func loadWebView(withHeight: CGFloat? = nil) {
@@ -144,7 +158,6 @@ class DetailsViewController: UIViewController {
     fileprivate func isPortrait() {
         UIView.animate(withDuration: 0.5) { 
             self.topConstraintNavigationView.constant = Constraint.topNavigationViewIsShow
-            self.bottomConstraintScrollView.constant = Constraint.bottomScrollViewIsShow
             self.view.layoutIfNeeded()
         }
     }
@@ -152,12 +165,11 @@ class DetailsViewController: UIViewController {
     fileprivate func isLandscape() {
         UIView.animate(withDuration: 0.5) {
             self.topConstraintNavigationView.constant = Constraint.topNavigationViewIsHidden
-            self.bottomConstraintScrollView.constant = self.scrollView.bounds.height * (-1)
             self.view.layoutIfNeeded()
         }
     }
     
-    fileprivate func setupDetailsTextView() {
+    fileprivate func setupDetailsTextLabel() {
     
         let keyAttributes = [NSFontAttributeName: Constants.Font.medium1!, NSForegroundColorAttributeName: Constants.Color.light]
         let valueAttributes = [NSFontAttributeName: Constants.Font.medium1!, NSForegroundColorAttributeName: Constants.Color.yellow]
@@ -169,12 +181,12 @@ class DetailsViewController: UIViewController {
         let value1 = NSAttributedString(string: "\(model?.movie?.released ?? "---")\n", attributes: valueAttributes)
         let key2 = NSAttributedString(string: "\(Constants.Text.runtime): ", attributes: keyAttributes)
         let value2 = NSAttributedString(string: "\(model?.movie?.runtime ?? 0)\n", attributes: valueAttributes)
-        let key3 = NSAttributedString(string: "\(Constants.Text.tagline): ", attributes: keyAttributes)
-        let value3 = NSAttributedString(string: "\(model?.movie?.tagline ?? "---")\n", attributes: valueAttributes)
-        let key4 = NSAttributedString(string: "\(Constants.Text.rating): ", attributes: keyAttributes)
-        let value4 = NSAttributedString(string: "\(rating)\n", attributes: valueAttributes)
+        let key3 = NSAttributedString(string: "\(Constants.Text.rating): ", attributes: keyAttributes)
+        let value3 = NSAttributedString(string: "\(rating)\n", attributes: valueAttributes)
+        let key4 = NSAttributedString(string: "\(Constants.Text.tagline): ", attributes: keyAttributes)
+        let value4 = NSAttributedString(string: "\(model?.movie?.tagline ?? "---")\n", attributes: valueAttributes)
         let key5 = NSAttributedString(string: "\(Constants.Text.genres): ", attributes: keyAttributes)
-        let value5 = NSAttributedString(string: "\(genres)\n", attributes: valueAttributes)
+        let value5 = NSAttributedString(string: "\(genres)\n\n", attributes: valueAttributes)
         let key6 = NSAttributedString(string: "\(Constants.Text.overview): ", attributes: keyAttributes)
         let value6 = NSAttributedString(string: "\(model?.movie?.overview ?? "---")", attributes: valueAttributes)
         
@@ -195,7 +207,6 @@ class DetailsViewController: UIViewController {
     }
     
     fileprivate func setupScrollView() {
-        scrollView.setContentOffset(.zero, animated: true)
         scrollView.contentSize = CGSize(width: 0, height: heightConstraintDetailsTextLabel.constant + heightConstraintContentGalleryView.constant + heightConstraintGalleryLabel.constant + (3 * Constraint.spaceBetweenItemsInScrollView + 8))
         scrollView.isScrollEnabled = true
         scrollView.showsVerticalScrollIndicator = true
@@ -208,9 +219,39 @@ class DetailsViewController: UIViewController {
 }
 
 extension DetailsViewController: NavigationBarViewDelegate {
+    
     func didClickOnDismiss(sender: UIButton) {
         dismiss(animated: true) {
             self.webView.stopLoading()
+        }
+    }
+    
+    func didClickOnShare(sender: UIButton) {
+        
+        let trailerUrl = model?.movie?.trailerUrl ?? ""
+        let text = "\(model?.movie?.title ?? "")\n\(trailerUrl)"
+        var itemsToShare: [Any] = [text]
+        
+        if let selectedImage = selectedImage {
+            itemsToShare = [text, selectedImage]
+        }
+        
+        shareActivityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            
+            let x = view.frame.size.width / 2
+            let y = view.frame.size.height / 2.8
+            let width = CGFloat(0)
+            let height = width
+            
+            shareActivityVC?.popoverPresentationController?.sourceView = view
+            shareActivityVC?.popoverPresentationController?.sourceRect = CGRect(x: x, y: y, width: width, height: height)
+            shareActivityVC?.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        }
+        
+        if let shareActivity = shareActivityVC {
+            present(shareActivity, animated: true, completion: nil)
         }
     }
 }
@@ -230,5 +271,42 @@ extension DetailsViewController: UIWebViewDelegate {
     func webViewDidFinishLoad(_ webView: UIWebView) {
         activityIndicator.stopAnimating()
         hideError()
+    }
+}
+
+extension DetailsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return gallery.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath)
+        let imageView = cell.viewWithTag(1) as? UIImageView
+        
+        if let url = URL(string: gallery[indexPath.item]) {
+            imageView?.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "Placeholder"))
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: Constants.UI.Storyboard.Segue.gallery, sender: indexPath)
+    }
+}
+
+extension DetailsViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        switch identifier {
+        case Constants.UI.Storyboard.Segue.gallery:
+            guard let indexPath = sender as? IndexPath else { return }
+            let controller = segue.destination as? GalleryViewController
+            controller?.selectedImageUrl = gallery[indexPath.item]
+        default:
+            break
+        }
     }
 }
