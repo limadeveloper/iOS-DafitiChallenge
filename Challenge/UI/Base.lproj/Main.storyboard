@@ -133,7 +133,7 @@
                     <connections>
                         <outlet property="collectionView" destination="Arp-Lv-uNv" id="rvf-Is-Vxb"/>
                         <segue destination="ZM8-ro-0oG" kind="presentation" identifier="Details" modalPresentationStyle="formSheet" id="xn3-rI-UJe"/>
-                        <segue destination="Pby-gm-4d3" kind="presentation" identifier="Search" id="vN6-TG-wIS"/>
+                        <segue destination="Pby-gm-4d3" kind="presentation" identifier="Search" modalPresentationStyle="formSheet" id="vN6-TG-wIS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5k-jk-Yf5" sceneMemberID="firstResponder"/>
@@ -282,7 +282,7 @@
                         <outlet property="navigationImage" destination="7i9-d7-Bfc" id="Nlh-x3-ll1"/>
                         <outlet property="searchContainerView" destination="Oqi-IQ-WOd" id="xY7-Yf-J6l"/>
                         <outlet property="tableView" destination="gOd-Sz-TIj" id="kse-rI-ZJu"/>
-                        <segue destination="ZM8-ro-0oG" kind="presentation" identifier="Details" id="UM7-az-CYO"/>
+                        <segue destination="ZM8-ro-0oG" kind="presentation" identifier="Details" modalPresentationStyle="formSheet" id="UM7-az-CYO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B9D-ov-MFe" userLabel="First Responder" sceneMemberID="firstResponder"/>

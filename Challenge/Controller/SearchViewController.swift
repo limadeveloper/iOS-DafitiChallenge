@@ -73,6 +73,7 @@ class SearchViewController: UIViewController {
         searchController?.searchResultsUpdater = self
         
         searchController?.searchBar.sizeToFit()
+        searchController?.searchBar.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleRightMargin, .flexibleBottomMargin, .flexibleWidth, .flexibleHeight]
         searchController?.searchBar.barStyle = .black
         searchController?.searchBar.searchBarStyle = .default
         searchController?.searchBar.tintColor = .white
