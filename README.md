@@ -13,7 +13,7 @@ You will need to create an iOS app, preferentially in Swift, using the last vers
 * AlamofireImage
 
 ### Demo
-<p align="left">
+<p align="center">
 <img src="https://github.com/limadeveloper/iOS-DafitiChallenge/blob/develop/Docs/images/01.png" width="280">
 <img src="https://github.com/limadeveloper/iOS-DafitiChallenge/blob/develop/Docs/images/02.png" width="280">
 </p>
