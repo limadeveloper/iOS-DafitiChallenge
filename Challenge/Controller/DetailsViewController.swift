@@ -140,10 +140,13 @@ class DetailsViewController: UIViewController {
         webView.scrollView.isScrollEnabled = true
         webView.delegate = self
         
-        let width = view.frame.size.width
-        let height = (width/320) * 275
+        heightConstraintWebView.constant += 73
         
-        heightConstraintWebView.constant = withHeight ?? height
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            let width = view.frame.size.width
+            let height = (width/320) * 275
+            heightConstraintWebView.constant = withHeight ?? height
+        }
         
         guard let stringUrl = model?.movie?.trailerUrl, let url = URL(string: stringUrl) else { return }
         
