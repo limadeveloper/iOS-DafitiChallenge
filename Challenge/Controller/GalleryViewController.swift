@@ -55,7 +55,7 @@ class GalleryViewController: UIViewController {
         imageView = UIImageView(frame: view.bounds)
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        imageView.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin]
         
         if let stringUrl = selectedImageUrl, let url = URL(string: stringUrl) {
             imageView.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "Placeholder"))
