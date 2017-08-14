@@ -16,7 +16,6 @@ You will need to create an iOS app, preferentially in Swift, using the last vers
  <p align="left">
 <img src="https://github.com/limadeveloper/iOS-DafitiChallenge/blob/develop/Docs/images/01.png" width="375">
 </p>
-<br>
 
 <p align="left">
 <img src="https://github.com/limadeveloper/iOS-DafitiChallenge/blob/develop/Docs/images/02.png" width="375">
@@ -26,4 +25,3 @@ You will need to create an iOS app, preferentially in Swift, using the last vers
 <p align="left">
 <img src="https://github.com/limadeveloper/iOS-DafitiChallenge/blob/develop/Docs/images/03.png" width="375">
 </p>
-<br>
