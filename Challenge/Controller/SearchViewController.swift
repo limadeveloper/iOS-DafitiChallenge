@@ -74,7 +74,7 @@ class SearchViewController: UIViewController {
         
         searchController?.searchBar.sizeToFit()
         searchController?.searchBar.barStyle = .black
-        searchController?.searchBar.searchBarStyle = .minimal
+        searchController?.searchBar.searchBarStyle = .default
         searchController?.searchBar.tintColor = .white
         searchController?.searchBar.keyboardAppearance = .dark
         
