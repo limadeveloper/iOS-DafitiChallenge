@@ -18,12 +18,21 @@ extension CGFloat {
 }
 
 extension UIImageView {
+    
     func blur(style: UIBlurEffectStyle = .light) {
         let effect = UIBlurEffect(style: style)
         let effectView = UIVisualEffectView(effect: effect)
         effectView.frame = self.bounds
         effectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(effectView)
+    }
+    
+    func unBlur() {
+        for subview in self.subviews {
+            if subview is UIVisualEffectView {
+                subview.removeFromSuperview()
+            }
+        }
     }
 }
 

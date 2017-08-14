@@ -94,7 +94,7 @@ class NavigationBarView: UIView {
         titleLabel.text = model.movie?.title
         titleLabel.textColor = Constants.Color.light
         titleLabel.shadowColor = Constants.Color.dark
-        titleLabel.shadowOffset = CGSize(width: 0, height: 2)
+        titleLabel.shadowOffset = CGSize(width: 0, height: 0.7)
         
         if let url = model.movie?.image?.selectedUrl {
             backgroundImage.af_setImage(withURL: url)

@@ -144,6 +144,7 @@ struct Constants {
             struct Segue {
                 static let details = "Details"
                 static let gallery = "Gallery"
+                static let search = "Search"
             }
         }
         

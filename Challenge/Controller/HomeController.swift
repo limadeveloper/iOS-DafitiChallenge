@@ -11,7 +11,7 @@ import UIKit
 class HomeController: UIViewController {
     
     // MARK: - Properties
-    @IBOutlet fileprivate weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     fileprivate var models: [Model]? = [Model]()
     fileprivate var index = Int()
@@ -33,6 +33,10 @@ class HomeController: UIViewController {
     }
     
     // MARK: - Actions
+    @IBAction private func goSearch(sender: UIButton) {
+        performSegue(withIdentifier: Constants.UI.Storyboard.Segue.search, sender: nil)
+    }
+    
     fileprivate func loadData(page: Int = 1) {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -106,7 +110,7 @@ class HomeController: UIViewController {
         }
     }
     
-    fileprivate func updateUI() {
+    private func updateUI() {
         
         navigationItem.title = NSLocalizedString(Constants.Text.movies, comment: "")
         
@@ -121,7 +125,7 @@ class HomeController: UIViewController {
         print("Count: \(models?.count ?? 0)")
     }
     
-    fileprivate func setupRefreshControl() {
+    private func setupRefreshControl() {
         
         refreshControl.tintColor = Constants.Color.yellow
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
@@ -133,7 +137,7 @@ class HomeController: UIViewController {
         }
     }
     
-    @objc fileprivate func refresh(sender: UIRefreshControl) {
+    @objc private func refresh(sender: UIRefreshControl) {
         loadData()
     }
 }
@@ -182,6 +186,9 @@ extension HomeController {
             let controller = segue.destination as? DetailsViewController
             controller?.model = models?[indexPath.row]
             controller?.selectedImage = selectedImage
+        case Constants.UI.Storyboard.Segue.search:
+            let controller = segue.destination as? SearchViewController
+            controller?.models = models
         default:
             break
         }

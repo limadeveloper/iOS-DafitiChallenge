@@ -30,6 +30,7 @@
 		822EEC801F3BFA1000641E0B /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EEC7F1F3BFA1000641E0B /* Movie.swift */; };
 		822EEC821F3BFA3100641E0B /* ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EEC811F3BFA3100641E0B /* ID.swift */; };
 		822EEC841F3BFA4600641E0B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822EEC831F3BFA4600641E0B /* Image.swift */; };
+		823B91921F412A33004D95B2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823B91911F412A33004D95B2 /* SearchViewController.swift */; };
 		82A2FFE51F3E53410029DCBE /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A2FFE41F3E53410029DCBE /* NavigationBarView.swift */; };
 		82A2FFE71F3E55650029DCBE /* NavigationBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82A2FFE61F3E55650029DCBE /* NavigationBarView.xib */; };
 		82DB93471F3DE6E500947810 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB93461F3DE6E500947810 /* CustomButton.swift */; };
@@ -88,6 +89,7 @@
 		822EEC7F1F3BFA1000641E0B /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		822EEC811F3BFA3100641E0B /* ID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ID.swift; sourceTree = "<group>"; };
 		822EEC831F3BFA4600641E0B /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		823B91911F412A33004D95B2 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		828296901F3C7A3700E97B93 /* playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = playground.playground; sourceTree = "<group>"; };
 		82A2FFE41F3E53410029DCBE /* NavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationBarView.swift; path = View/NavigationBarView.swift; sourceTree = "<group>"; };
 		82A2FFE61F3E55650029DCBE /* NavigationBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavigationBarView.xib; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				822EEC351F3BF5E300641E0B /* HomeController.swift */,
 				822E10DF1F3D629D000E029E /* DetailsViewController.swift */,
 				82F587871F3FED6D00CB4B84 /* GalleryViewController.swift */,
+				823B91911F412A33004D95B2 /* SearchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 				82A2FFE51F3E53410029DCBE /* NavigationBarView.swift in Sources */,
 				82E953181F3C012F00840328 /* Extensions.swift in Sources */,
 				822EEC661F3BF71D00641E0B /* UltraVisualLayout.swift in Sources */,
+				823B91921F412A33004D95B2 /* SearchViewController.swift in Sources */,
 				822EEC801F3BFA1000641E0B /* Movie.swift in Sources */,
 				822EEC7B1F3BF85700641E0B /* Constants.swift in Sources */,
 				822E10E01F3D629D000E029E /* DetailsViewController.swift in Sources */,

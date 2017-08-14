@@ -99,6 +99,8 @@ class DetailsViewController: UIViewController {
     // MARK: - Actions
     fileprivate func updateUI() {
         
+        backgroundImage.image = #imageLiteral(resourceName: "Placeholder")
+        
         if let url = model?.movie?.image?.selectedUrl {
             backgroundImage.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "Placeholder"))
         }
