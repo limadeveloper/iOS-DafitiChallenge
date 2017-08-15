@@ -101,6 +101,8 @@ struct Constants {
         static let rating = "Rating"
         static let genres = "Genres"
         static let gallery = "Gallery"
+        static let no = "No"
+        static let yes = "Yes"
     }
     
     struct Color {
@@ -141,6 +143,16 @@ struct Constants {
     struct UI {
         
         struct Storyboard {
+            
+            struct Name {
+                static let main = "Main"
+            }
+            
+            struct ID {
+                static let home = "HomeController"
+                static let homeGrid = "HomeGridViewController"
+            }
+            
             struct Segue {
                 static let details = "Details"
                 static let gallery = "Gallery"

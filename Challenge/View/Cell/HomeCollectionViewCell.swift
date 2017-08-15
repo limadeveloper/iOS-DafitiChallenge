@@ -19,8 +19,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var imageViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet private weak var titleLabelConstraintHeight: NSLayoutConstraint!
     
-    private let requests = Requests()
-    
     var model: Model? {
         didSet {
             
@@ -85,9 +83,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
             likedButton.tintColor = Constants.Color.liked
         }
     }
-}
-
-extension HomeCollectionViewCell {
+    
     @objc func didClickOnLikedButton(notification: Notification) {
         updateLikedButton(by: model)
     }

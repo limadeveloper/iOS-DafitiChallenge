@@ -12,6 +12,7 @@ class HomeController: UIViewController {
     
     // MARK: - Properties
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var gridCollectionView: UICollectionView!
     
     fileprivate var models: [Model]? = [Model]()
     fileprivate var index = Int()
@@ -25,6 +26,7 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         
         loadData()
+        setupCollectionView()
         setupRefreshControl()
     }
     
@@ -71,8 +73,9 @@ class HomeController: UIViewController {
                     self?.index = Int()
                     self?.refreshControl.endRefreshing()
                     
-                    let action = UIAlertAction(title: Constants.Text.done, style: .destructive, handler: nil)
-                    AlertUtil.showAlert(message: error ?? Constants.API.Errors.getErrorMessage(byCode: 0), actions: [action], target: self)
+                    let action1 = UIAlertAction(title: Constants.Text.no, style: .destructive, handler: nil)
+                    let action2 = UIAlertAction(title: Constants.Text.yes, style: .default) { (action) in self?.loadData(page: page) }
+                    AlertUtil.showAlert(message: error ?? Constants.API.Errors.getErrorMessage(byCode: 0), actions: [action1, action2], target: self)
                 }
             }
             
@@ -112,17 +115,28 @@ class HomeController: UIViewController {
     
     private func updateUI() {
         
-        navigationItem.title = NSLocalizedString(Constants.Text.movies, comment: "")
-        
         view.backgroundColor = Constants.Color.dark
+        
+        collectionView.reloadData()
+        gridCollectionView.reloadData()
+        
+        print("Page: \(page)")
+        print("Count: \(models?.count ?? 0)")
+    }
+    
+    private func setupCollectionView() {
         
         collectionView.contentInset.top = 5
         collectionView.backgroundColor = .clear
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        collectionView.isHidden = UIDevice.current.userInterfaceIdiom == .pad
         collectionView.reloadData()
         
-        print("Page: \(page)")
-        print("Count: \(models?.count ?? 0)")
+        let layout = GridFlowLayout()
+        gridCollectionView.backgroundColor = .clear
+        gridCollectionView.setCollectionViewLayout(layout, animated: true)
+        gridCollectionView.isHidden = UIDevice.current.userInterfaceIdiom != .pad
+        gridCollectionView.reloadData()
     }
     
     private func setupRefreshControl() {
@@ -132,8 +146,10 @@ class HomeController: UIViewController {
         
         if #available(iOS 10.0, *) {
             collectionView.refreshControl = refreshControl
+            gridCollectionView.refreshControl = refreshControl
         } else {
             collectionView.addSubview(refreshControl)
+            gridCollectionView.addSubview(refreshControl)
         }
     }
     
@@ -153,6 +169,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView.tag == 2 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! GridCollectionViewCell
+            cell.model = models?[indexPath.row]
+            return cell
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! HomeCollectionViewCell
         cell.model = models?[indexPath.row]
         return cell
@@ -171,8 +194,15 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as? HomeCollectionViewCell
-        selectedImage = cell?.imageView.image
+        
+        if collectionView.tag == 1 {
+            let cell = collectionView.cellForItem(at: indexPath) as? HomeCollectionViewCell
+            selectedImage = cell?.imageView.image
+        }else if collectionView.tag == 2 {
+            let cell = collectionView.cellForItem(at: indexPath) as? GridCollectionViewCell
+            selectedImage = cell?.imageView.image
+        }
+        
         performSegue(withIdentifier: Constants.UI.Storyboard.Segue.details, sender: indexPath)
     }
 }

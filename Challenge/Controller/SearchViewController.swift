@@ -35,10 +35,11 @@ class SearchViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard let searchBar = searchController?.searchBar, searchEnable else { return }
+        searchController?.isActive = true
         
-        searchBarCancelButtonClicked(searchBar)
-        clearSearch()
+        DispatchQueue.main.async {
+            self.searchController?.searchBar.becomeFirstResponder()
+        }
     }
     
     // MARK: - Actions
@@ -78,16 +79,17 @@ class SearchViewController: UIViewController {
         searchController?.searchBar.searchBarStyle = .default
         searchController?.searchBar.tintColor = .white
         searchController?.searchBar.keyboardAppearance = .dark
+        searchController?.searchBar.delegate = self
         
         if let searchBar = searchController?.searchBar {
             searchContainerView.addSubview(searchBar)
+            searchBar.becomeFirstResponder()
         }
         
         searchController?.delegate = self
         
         searchController?.dimsBackgroundDuringPresentation = false
         searchController?.hidesNavigationBarDuringPresentation = false
-        searchController?.searchBar.delegate = self
     }
     
     fileprivate func clearSearch() {
